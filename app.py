@@ -9,7 +9,7 @@ base_url = 'http://api.openweathermap.org/data/2.5/weather'
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('home.html')
+    return render_template('layout.html')
 @app.route('/weather', methods=['GET'])
 def get_weather():
     # Get the city name from query parameters, default to 'London' if not provided

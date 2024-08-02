@@ -1,0 +1,16 @@
+.navbar {
+    display: grid;
+    border-style: solid;
+    border-width: medium;
+    width: 100%;
+    height: 50px;
+    justify-content: start;
+    align-items: center;
+}
+.container1 {
+    display: flex;
+    flex-direction: column; /* This ensures items are arranged horizontally */
+    
+    width: 97%;
+    height: 50%;
+  }
