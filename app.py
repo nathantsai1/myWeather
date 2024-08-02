@@ -2,12 +2,14 @@ import requests
 from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
-
 # API key and base URL for OpenWeather API
 # api_key = 'd0d0e6975b6a6865318ca1e63051a638'
 api_key = 'd0d0e6975b6a6865318ca1e63051a638'
 base_url = 'http://api.openweathermap.org/data/2.5/weather'
 
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('home.html')
 @app.route('/weather', methods=['GET'])
 def get_weather():
     # Get the city name from query parameters, default to 'London' if not provided
