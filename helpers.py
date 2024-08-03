@@ -28,6 +28,7 @@ def apology(message, code=400):
 
 def weather(city_name, api_key):
     base_url = 'http://api.openweathermap.org/data/2.5/weather'
+    # Construct the complete API URL
     complete_url = f"{base_url}?q={city_name}&appid={api_key}"
     response = requests.get(complete_url)
     if response.status_code == 200:
@@ -59,6 +60,6 @@ def weather(city_name, api_key):
 
         # Extract specific data, e.g., temperature, description, etc.
     else:
-        return render_template('weather.html', row=city_name)
+        return 'no'
 
 

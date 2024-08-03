@@ -37,9 +37,9 @@
     <div class="container1 boo">
         <!-- add a search bar to locate cities -->
         <div class="search-container">
-            <form action="/action_page.php">
-              <input type="input" placeholder="Find a city.." class="noo soo" name="search">
-              <button type="submit"><i class="fa fa-search noo"></i></button>
+            <form action="/weather" method="POST">
+              <input type="input" name="city" placeholder="Find a city.." class="noo soo" name="search">
+              <button type="submit" class="btn btn-success">Find weather now</button>
             </form>
         </div>
         {% block weather %}
@@ -51,4 +51,15 @@
             </h3>
         {% endblock %}
     </div>
+    <!-- alert -->
+     <!-- script hi -->
+      <script>
+        alert(hi);
+      </script>
+     {% if alert %}
+        <script>
+             let alert = "{{ alert }}";
+             alert(`It seems like city['${alert}'] does not exist! Please change your spelling or city name`);
+        </script>
+     {% endif %}
 {% endblock %}
