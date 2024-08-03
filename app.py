@@ -1,7 +1,11 @@
 import requests
 from flask import Flask, jsonify, request, render_template
 
-from helpers import (weather)
+from helpers import (
+    weather,
+    location
+    )
+
 # my first time using an api
 app = Flask(__name__)
 # API key and base URL for OpenWeather API
@@ -18,11 +22,26 @@ def home():
 def get_weather():
     # Get the city name from query parameters, default to 'London' if not provided
     if request.method == "POST":
-        api_key = 'd0d0e6975b6a6865318ca1e63051a638'
+        # check paramaters
+        if not request.form.get("city") or request.form.get("city").strip() == "":
+            # give alert that declares that there is no city inputted
+            return render_template('weather.html', empty='empty')
+        
         # Construct the complete API URL
-        # complete_url = f"{base_url}?q={city_name}&appid={api_key}"
+
+        # use maps.co to geocode the location
+        api = '66aea33917c5a663090428mokbd8a48'
+        response = location(request.form.get('city'), api)
+        # if there is no location
+        if response == 'no':
+            return render_template('useless.html', alert=request.form.get('city'))
+        # jsonify response
+        data = response.json()
+        # give out all responses
+        return render_template('useless.html', row=data)
 
         # Send the request to OpenWeather API
+        api_key = 'd0d0e6975b6a6865318ca1e63051a638'
         response = weather(request.form.get('city'), api_key)
         if response == 'no':
             return render_template('weather.html', alert=request.form.get('city'))

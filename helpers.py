@@ -61,5 +61,15 @@ def weather(city_name, api_key):
         # Extract specific data, e.g., temperature, description, etc.
     else:
         return 'no'
-
-
+    
+def location(city_name, api_key):
+    # give coordinates of location based off of city_name
+    base_url = 'https://geocode.maps.co/search?q='
+    complete_url = f"{base_url}{city_name}london&api_key={api_key}"
+    response = requests.get(complete_url)
+    if response.status_code == 200:
+        # if there are locations, give all of them
+        return response
+    else:
+        # else, do not give failed response
+        return 'no'

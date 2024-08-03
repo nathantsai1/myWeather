@@ -38,7 +38,8 @@
         <!-- add a search bar to locate cities -->
         <div class="search-container">
             <form action="/weather" method="POST">
-              <input type="input" name="city" placeholder="Find a city.." class="noo soo" name="search">
+                <!-- take city, to insert into weather and location functions of helpers.py -->
+              <input type="input" name="city" placeholder="Find a city.." class="noo soo" name="search" required>
               <button type="submit" class="btn btn-success">Find weather now</button>
             </form>
         </div>
@@ -51,15 +52,16 @@
             </h3>
         {% endblock %}
     </div>
-    <!-- alert -->
-     <!-- script hi -->
-      <script>
-        alert('hi');
-      </script>
+    <!-- alerts -->
      {% if alert %}
         <script>
             //  let alert = "{{ alert }}";
              alert(`It seems like city['{{ alert }}'] does not exist! Please change your spelling or city name`);
+        </script>
+    <!-- or there is an empty string! -->
+     {% elif empty %}
+        <script>
+            alert('Please enter a valid value into the city input')
         </script>
      {% endif %}
 {% endblock %}
