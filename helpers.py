@@ -4,7 +4,6 @@ from flask import Flask, request, render_template
 # from another cs50 pset
 def apology(message, code=400):
     """Render message as an apology to user."""
-
     def escape(s):
         """
         Escape special characters.
@@ -23,7 +22,6 @@ def apology(message, code=400):
         ]:
             s = s.replace(old, new)
         return s
-
     return render_template("apology.html", top=code, bottom=escape(message)), code
 
 def weather(city_name, api_key):
@@ -65,7 +63,7 @@ def weather(city_name, api_key):
 def location(city_name, api_key):
     # give coordinates of location based off of city_name
     base_url = 'https://geocode.maps.co/search?q='
-    complete_url = f"{base_url}{city_name}london&api_key={api_key}"
+    complete_url = f"{base_url}{city_name}&api_key={api_key}"
     response = requests.get(complete_url)
     if response.status_code == 200:
         # if there are locations, give all of them

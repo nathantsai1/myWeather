@@ -32,13 +32,25 @@ def get_weather():
         # use maps.co to geocode the location
         api = '66aea33917c5a663090428mokbd8a48'
         response = location(request.form.get('city'), api)
-        # if there is no location
-        if response == 'no':
-            return render_template('useless.html', alert=request.form.get('city'))
+        # data = response.json()
+        # return jsonify(
+        #     data
+        # )
         # jsonify response
         data = response.json()
+
+        # if there is no location
+        if data == []:
+            return render_template('weather.html', alert=request.form.get('city'))
         # give out all responses
+        # get number of responses
+        length = sum(1 for i in data if isinstance(i, dict))
+        if length > 1:
+            # if there are multiple places, ask for which one to use
+            return render_template("loop.html", length=length, data=data)
         return render_template('useless.html', row=data)
+        # ask which one
+        
 
         # Send the request to OpenWeather API
         api_key = 'd0d0e6975b6a6865318ca1e63051a638'
