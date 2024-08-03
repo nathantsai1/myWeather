@@ -1,1 +1,27 @@
-{% extends layout.html %}
+{% extends "layout.html" %}
+
+{% block style %}
+    <style>
+        .hide {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+{% endblock %}
+{% block main %}
+<div class="blah">
+    <div class="container1">
+        <!-- welcomewelcomewelome -->
+        <h1 class="item1" style="height: 33%">Welcome to the good weather App</h1>
+        <h3 class="item1" style="height: 66%">Our open-source weather app comes from the bottom of this world, all the way to the top.
+            We strive to bring you the most updated, most factually correct, and most 'easiest' way
+            to collect the weather information. Whether you want to go on a rainy picnic, or a sunny
+            drive to the Gym, we got you covered! So hop onto 'the good weather App'!
+        </h3>
+    </div>
+    <div class="container1">
+        <button type="button" class="btn btn-success"><a href="/weather" class="hide">Get weather now</a></button>
+    </div>
+    <h1 class="container1">containered</h1>
+</div>
+{% endblock %}

@@ -1,15 +1,17 @@
 import requests
 from flask import Flask, jsonify, request, render_template
 
+# my first time using an api
 app = Flask(__name__)
 # API key and base URL for OpenWeather API
 # api_key = 'd0d0e6975b6a6865318ca1e63051a638'
+# thx to chatGPT for helping me with learning how to retrieve information from APIs
 api_key = 'd0d0e6975b6a6865318ca1e63051a638'
 base_url = 'http://api.openweathermap.org/data/2.5/weather'
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('layout.html')
+    return render_template('home.html')
 @app.route('/weather', methods=['GET'])
 def get_weather():
     # Get the city name from query parameters, default to 'London' if not provided
@@ -54,7 +56,7 @@ def get_weather():
         
         temperature = main['temp']
         weather_description = weather['description']
-        return render_template('useless.html', row=data)
+        return render_template('weather.html', row=data)
         # Return the results as JSON
         return jsonify({
             'city': city_name,

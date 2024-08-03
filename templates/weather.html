@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    <style>
+        .hoo {
+            color: #39ff14;
+        }
+    </style>
+{% endblock %}
+{% block main %}
+    <div class="container1">
+        <h2 class="hoo">Welcome to 'the good weather App', 
+            see your weather here
+        </h2>
+        <!-- for extensions later -->
+        {% block weather %}
+        <p>Default content if block is not overridden.</p>
+        {% endblock %}
+    </div>
+{% endblock %}
