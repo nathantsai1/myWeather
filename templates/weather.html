@@ -4,17 +4,51 @@
     <style>
         .hoo {
             color: #39ff14;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .loo {
+            /* just coloring, and for hoo */
+            color: #00CDAB;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .noo {
+            border: black hidden;
+            border-radius: 5px;
+        }
+        .soo {
+            border: 2px solid black;
+        }
+        .boo {
+            /* just adding background color */
+            background: repeating-conic-gradient(#CD001A, #7851A9);
+            padding: 10px;
+            margin: 10px;
+            width: 99%;
         }
     </style>
 {% endblock %}
 {% block main %}
-    <div class="container1">
-        <h2 class="hoo">Welcome to 'the good weather App', 
-            see your weather here
+    <div class="container1 boo">
+        <h2 class="hoo">This is the: weather page <br>
+            See your weather by searching below
         </h2>
         <!-- for extensions later -->
+    </div>
+    <div class="container1 boo">
+        <!-- add a search bar to locate cities -->
+        <div class="search-container">
+            <form action="/action_page.php">
+              <input type="input" placeholder="Find a city.." class="noo soo" name="search">
+              <button type="submit"><i class="fa fa-search noo"></i></button>
+            </form>
+        </div>
         {% block weather %}
-        <p>Default content if block is not overridden.</p>
+            <h3 class="loo">'the good weather App' has been waiting for you all along!
+                Enjoy the amazing benefits that come with this nifty app.
+            </h3>
+            <h3>
+                
+            </h3>
         {% endblock %}
     </div>
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    <style>
+        .useless {
+            background-image: url(https://pics.craiyon.com/2023-09-25/4ffcb62bbdd141559a73fdcdfbc69ce3.webp);
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+<!-- https://memegen.link/ -->
+<!-- https://knowyourmeme.com/memes/grumpy-cat -->
+<!-- and cs50 -->
+    <img alt="{{ top }}" class="border img-fluid" src="https://api.memegen.link/images/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.webp?background=https%3A%2F%2Fpics.craiyon.com%2F2023-09-25%2F4ffcb62bbdd141559a73fdcdfbc69ce3.webp&watermark=MemeComplete.com&token=oiqh0s5seakfc1veew0u" title="{{ top }}">
+{% endblock %}
