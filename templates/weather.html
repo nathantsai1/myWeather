@@ -54,12 +54,12 @@
     <!-- alert -->
      <!-- script hi -->
       <script>
-        alert(hi);
+        alert('hi');
       </script>
      {% if alert %}
         <script>
-             let alert = "{{ alert }}";
-             alert(`It seems like city['${alert}'] does not exist! Please change your spelling or city name`);
+            //  let alert = "{{ alert }}";
+             alert(`It seems like city['{{ alert }}'] does not exist! Please change your spelling or city name`);
         </script>
      {% endif %}
 {% endblock %}
