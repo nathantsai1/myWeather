@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 
 # from another cs50 pset
 def apology(message, code=400):
@@ -24,38 +24,27 @@ def apology(message, code=400):
         return s
     return render_template("apology.html", top=code, bottom=escape(message)), code
 
-def weather(lat, lon, api_key):
+def weather(lat, lon, units, api_key):
     # Construct the complete API URL
-    complete_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api_key}"
+    complete_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units={units}&appid={api_key}"
     response = requests.get(complete_url)
     if response.status_code == 200:
         # success!
         # give back the information needed
         return response
-        # also lemme give you important information
-        # gives results like:
-        #{'coord': {'lon': -0.1257, 'lat': 51.5085}, 
-        # 'weather': [{'id': 804, 'main': 'Clouds', 
-        # 'description': 'overcast clouds', 'icon': '04n'}], 
-        # 'base': 'stations', 
-        # 'main': {'temp': 293.86, 'feels_like': 293.84, 'temp_min': 291.91, 'temp_max': 294.87, 'pressure': 1011, 'humidity': 71, 'sea_level': 1011, 'grnd_level': 1007}, 
-        # 'visibility': 10000, 'wind': {'speed': 0.45, 'deg': 272, 'gust': 0.89}, 
-        # 'clouds': {'all': 100}, 
-        # 'dt': 1722633190, 
-        # 'sys': {'type': 2, 'id': 2075535, 'country': 'GB', 'sunrise': 1722572772, 'sunset': 1722628031}, 
-        # 'timezone': 3600, 'id': 2643743, 'name': 'London', 'cod': 200}
+    else:
+        return 'no'
 
-        # to extract from main:
-        # use: main = data['main']
-        # for a thing like temperature: temperature = main['temp']
+def reverse_weather(lat, lon, units, api_key):
+    # give weather not forecast as above
+    # Construct the complete API URL
+    complete_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units={units}&appid={api_key}"
 
-        # for a thing like weather:
-        # weather = data['weather'][0]
-        # description = weather['discription']
-
-        # for kelvin to ferenheihgt: Fahrenheit = ((Kelvin - 273.15) * 1.8) + 32
-
-        # Extract specific data, e.g., temperature, description, etc.
+    response = requests.get(complete_url)
+    if response.status_code == 200:
+        # success!
+        # give back the information needed
+        return response
     else:
         return 'no'
     
@@ -80,3 +69,4 @@ def reverse_geo(lat, lon, api_key):
         return response # like above
     else:
         return 'no'
+

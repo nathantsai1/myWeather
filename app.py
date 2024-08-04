@@ -9,7 +9,8 @@ from flask import (
     )
 from helpers import (
     weather,
-    location
+    location,
+    reverse_weather
     )
 
 # my first time using an api
@@ -53,25 +54,34 @@ def get_weather():
         link = f"/weather/{ data['lat'] }/{ data['lon']}"
         return redirect(link)       
     else:
+        # see if user wants to share location
+        # basically from openai
+        # data = request.get_json()
+        # latitude = data.get('latitude')
+        # longitude = data.get('longitude')
+        
         return render_template('weather.html')
 
-@app.route("/weather/<path:lat>/<path:lon>", methods=["POST", "GET"])
-def lat_n_lon(lat, lon):
+@app.route("/weather/<path:lat>/<path:lon>/<path:units>", methods=["POST", "GET"])
+def lat_n_lon(lat, lon, units):
     # use for finding latitude/longitude, and weather associated with it
     # Send the request to OpenWeather API
     if request.method == "GET":
-        response = weather(lat, lon, api_key)
-        if response == 'no':
+        response = weather(lat, lon, units, api_key)
+        today = reverse_weather(lat, lon, units, api_key)
+        if response == 'no' or today == 'no':
             # reverse geocache/get city name
             y = f'({lat}, {lon})'
             return render_template('weather.html', newert=y)
         # Check if the request was successful
         else:
             # Parse JSON data
+            dataday = today.json()
             data = response.json()
             # weather = data['weather'][0]
-            return jsonify(data)
-            return render_template('forecast.html', data=data)
+            return jsonify(dataday)
+            return jsonify(data['list'][0])
+            return render_template('forecast.html', data=data, lon=lon, lat=lat, today=dataday)
     else:
         abort(404)
 
