@@ -4,9 +4,12 @@
 {% block weather %}
     <!-- a little about this page -->
      <h1>Weather for: {{ data['city']['name'] }}<br></h1>
-
+        <hr>
     <!-- add three options -->
+    <h2>Change units of measure<hr></h2>
      <div class="container4">
-        <button type="button" class="btn btn-outline-primary"> </button>
+        <button type="button" class="btn btn-outline-primary"><a href="/weather/{{lat}}/{{lon}}/standard">Standard</a></button>
+        <button type="button" class="btn btn-outline-primary"><a href="/weather/{{lat}}/{{lon}}/metric">Metric</a></button>
+        <button type="button" class="btn btn-outline-primary"><a href="/weather/{{lat}}/{{lon}}/imperial">Imperial</a></button>
      </div>
 {% endblock %}

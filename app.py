@@ -67,6 +67,9 @@ def lat_n_lon(lat, lon, units):
     # use for finding latitude/longitude, and weather associated with it
     # Send the request to OpenWeather API
     if request.method == "GET":
+        # make sure units is actually a units
+        if (units !="standard" and units != "metric" and units != "imperial"):
+            return render_template('weather.html', units=units)
         response = weather(lat, lon, units, api_key)
         today = reverse_weather(lat, lon, units, api_key)
         if response == 'no' or today == 'no':

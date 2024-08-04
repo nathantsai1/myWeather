@@ -68,5 +68,10 @@
             alert('Please enter a valid value into the city input')
             // ask for location
         </script>
+    {% elif units %}
+        <script>
+            alert('It seems like unit: "{{ units }}" is not an accepted unit. Please change it!')
+            // ask for location
+        </script>
      {% endif %}
 {% endblock %}
