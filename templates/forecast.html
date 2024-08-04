@@ -1,20 +1,52 @@
 {% extends "weather.html" %}
 
+{% block stile %}
+<style>
+   .none {
+   color: white;
+   text-decoration: none;
+   border-width: 0px;
+ }
+
+ .just {
+   font-family: "Lucida Console", "Courier New", monospace;
+   grid-column: 5;
+ }
+</style>
+{% endblock %}
 <!-- shows forecast, assuming there is data -->
 {% block weather %}
     <!-- a little about this page -->
      <h1>Weather for: {{ data['city']['name'] }}<br></h1>
-     <h3>Updated as of: '{{ hope }}' local time</h3>
+     <h3>Updated as of: '{{ now }}' local time</h3>
         <hr>
+   <!-- use F, C, or K -->
+    {% if united == 'standard' %}
+      {% set my_unit = '° K' %}
+    {% elif united == 'metric' %}
+      {% set my_unit = '° C' %}
+    {% elif united == 'imperial' %}
+      {% set my_unit = '° F' %}
+    {% endif %}
     <!-- add three options -->
     <h2>Change units of measure<hr></h2>
      <div class="container4">
-        <button type="button" class="btn btn-outline-primary"><a href="/weather/{{lat}}/{{lon}}/standard">Standard</a></button>
-        <button type="button" class="btn btn-outline-primary"><a href="/weather/{{lat}}/{{lon}}/metric">Metric</a></button>
-        <button type="button" class="btn btn-outline-primary"><a href="/weather/{{lat}}/{{lon}}/imperial">Imperial</a></button>
+        <button type="button" class="btn btn-primary"><a class="none" style="color: white" href="/weather/{{lat}}/{{lon}}/standard">Standard</a></button>
+        <button type="button" class="btn btn-success "><a class="none"href="/weather/{{lat}}/{{lon}}/metric">Metric</a></button>
+        <button type="button" class="btn btn-danger"><a class="none" href="/weather/{{lat}}/{{lon}}/imperial">Imperial</a></button>
      </div>
-     
+
      <!-- display todays weather -->
       <h2>Weather today:</h2>
+      <div class="container5">
+         <div class="item3">
+            <h5 class="just">Feels like:<br></h5>
+            <h3>{{ today['main']['feels_like'] }}{{ my_unit }}</h3>
+         </div>
+      </div>
+      <!-- Add all information -->
+      <script>
+         hello = window.location.href
+      </script>
       
 {% endblock %}

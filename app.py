@@ -85,14 +85,15 @@ def lat_n_lon(lat, lon, units):
             timed = time_zone(lat, lon, api)
             # Parse JSON data
             dataday = today.json()
+            # dataday is today's 
             data = response.json()
+            # data is the week
             zoned = timed.json()
             # return dataday
-            # return zoned['nextAbbreviation']
+            # and zoned is the time zone
             # get time:
-            return dataday
             hope = datetime.datetime.utcfromtimestamp(dataday['dt']).strftime('%Y-%m-%d %H:%M:%S')
-            return render_template('forecast.html', data=data, lon=lon, lat=lat, today=dataday, timing=zoned, now=hope)
+            return render_template('forecast.html', data=data, lon=lon, lat=lat, today=dataday, timing=zoned, now=hope, united=units)
     else:
         abort(404)
 
