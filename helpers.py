@@ -1,5 +1,7 @@
 import requests
 from flask import Flask, request, render_template, jsonify
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 def time_zone(lat, lon, api_key):
     # construct complete API URL
@@ -11,7 +13,7 @@ def weather(lat, lon, units, api_key):
     # Construct the complete API URL
     complete_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units={units}&appid={api_key}"
     response = requests.get(complete_url)
-    if response['status'] == "OK":
+    if response.status_code == 200:
         # success!
         # give back the information needed
         return response

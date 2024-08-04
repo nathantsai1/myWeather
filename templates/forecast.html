@@ -4,6 +4,7 @@
 {% block weather %}
     <!-- a little about this page -->
      <h1>Weather for: {{ data['city']['name'] }}<br></h1>
+     <h3>Updated as of: '{{ hope }}' local time</h3>
         <hr>
     <!-- add three options -->
     <h2>Change units of measure<hr></h2>
@@ -12,6 +13,7 @@
         <button type="button" class="btn btn-outline-primary"><a href="/weather/{{lat}}/{{lon}}/metric">Metric</a></button>
         <button type="button" class="btn btn-outline-primary"><a href="/weather/{{lat}}/{{lon}}/imperial">Imperial</a></button>
      </div>
+     
      <!-- display todays weather -->
       <h2>Weather today:</h2>
       
