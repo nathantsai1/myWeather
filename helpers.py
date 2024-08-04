@@ -1,34 +1,17 @@
 import requests
 from flask import Flask, request, render_template, jsonify
 
-# from another cs50 pset
-def apology(message, code=400):
-    """Render message as an apology to user."""
-    def escape(s):
-        """
-        Escape special characters.
-
-        https://github.com/jacebrowning/memegen#special-characters
-        """
-        for old, new in [
-            ("-", "--"),
-            (" ", "-"),
-            ("_", "__"),
-            ("?", "~q"),
-            ("%", "~p"),
-            ("#", "~h"),
-            ("/", "~s"),
-            ('"', "''"),
-        ]:
-            s = s.replace(old, new)
-        return s
-    return render_template("apology.html", top=code, bottom=escape(message)), code
+def time_zone(lat, lon, api_key):
+    # construct complete API URL
+    complete_url = f" http://api.timezonedb.com/v2.1/get-time-zone?key={api_key}&format=json&by=position&lat={lat}&lng={lon}"
+    response = requests.get(complete_url)
+    return response
 
 def weather(lat, lon, units, api_key):
     # Construct the complete API URL
     complete_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units={units}&appid={api_key}"
     response = requests.get(complete_url)
-    if response.status_code == 200:
+    if response['status'] == "OK":
         # success!
         # give back the information needed
         return response

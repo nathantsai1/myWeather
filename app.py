@@ -10,8 +10,11 @@ from flask import (
 from helpers import (
     weather,
     location,
-    reverse_weather
+    reverse_weather,
+    time_zone
     )
+import datetime
+import pytz
 
 # my first time using an api
 app = Flask(__name__)
@@ -78,13 +81,19 @@ def lat_n_lon(lat, lon, units):
             return render_template('weather.html', newert=y)
         # Check if the request was successful
         else:
+            api = 'Y6MYXZF20VQF'
+            timed = time_zone(lat, lon, api)
             # Parse JSON data
             dataday = today.json()
             data = response.json()
+            zoned = timed.json()
+
+            # get timezone:
+            utc_dt = datetime.datetime.utcfromtimestamp(unix_time)
+            timezone = pytz.timezone(zoned['zoneName'])
+            local_dt = utc_dt.replace(tzinfo=pytz.utc).astimezone(timezone)
             # weather = data['weather'][0]
-            return jsonify(dataday)
-            return jsonify(data['list'][0])
-            return render_template('forecast.html', data=data, lon=lon, lat=lat, today=dataday)
+            return render_template('forecast.html', data=data, lon=lon, lat=lat, today=dataday, timing=zoned, )
     else:
         abort(404)
 
