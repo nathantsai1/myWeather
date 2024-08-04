@@ -24,10 +24,9 @@ def apology(message, code=400):
         return s
     return render_template("apology.html", top=code, bottom=escape(message)), code
 
-def weather(city_name, api_key):
-    base_url = 'http://api.openweathermap.org/data/2.5/weather'
+def weather(lat, lon, api_key):
     # Construct the complete API URL
-    complete_url = f"{base_url}?q={city_name}&appid={api_key}"
+    complete_url = f"api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={api_key}"
     response = requests.get(complete_url)
     if response.status_code == 200:
         # success!
@@ -62,12 +61,11 @@ def weather(city_name, api_key):
     
 def location(city_name, api_key):
     # give coordinates of location based off of city_name
-    base_url = 'https://api.openweathermap.org/geo/1.0/direct'
-    complete_url = f"{base_url}?q={city_name}&appid={api_key}"
-    gift = requests.get(complete_url)
-    if gift.status_code == 200:
+    complete_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city_name}&limit=5&appid={api_key}"
+    response = requests.get(complete_url)
+    if response.status_code == 200:
         # if there are locations, give all of them
-        return gift
+        return response
     else:
         # else, do not give failed response
         return complete_url

@@ -17,7 +17,7 @@ base_url = 'http://api.openweathermap.org/data/2.5/weather'
 def home():
     return render_template('home.html')
 
-
+api_key = 'd0d0e6975b6a6865318ca1e63051a638'
 @app.route('/weather', methods=['POST', 'GET'])
 def get_weather():
     # Get the city name from query parameters, default to 'London' if not provided
@@ -30,32 +30,28 @@ def get_weather():
         # Construct the complete API URL
 
         # use openweathermap to geocode the location
-        api_key = 'd0d0e6975b6a6865318ca1e63051a638'
         response = location(request.form.get('city'), api_key)
-        # data = response.json()
-        # return jsonify(
-        #     data
-        # )
-        # jsonify response
+       
         # if there is no location
-        return response
         if response == "no":
             return render_template('weather.html', alert=request.form.get('city'))
         data = response.json()
         # give out all responses
         # get number of responses
         length = sum(1 for i in data if isinstance(i, dict))
-        # if length > 1:
-        #     # if there are multiple places, ask for which one to use
-        #     return render_template("loop.html", length=length, data=data)
-        return jsonify(
-            data
-        )
-        return render_template('useless.html', row=data)
-        # ask which one
-        
+        if length > 1:
+            # if there are multiple places, ask for which one to use
+            return render_template("loop.html", length=length, data=data)
+        #return specific city information
+        return render_template('useless.html', row=data)        
+    else:
+        return render_template('weather.html')
 
-        # Send the request to OpenWeather API
+@app.route("/weather/<float:lat>/<float:lon>", methods=["POST", "GET"])
+def lat_n_lon(lat, lon):
+    # use for finding latitude/longitude, and weather associated with it
+    # Send the request to OpenWeather API
+    if request.method == "POST":
         response = weather(request.form.get('city'), api_key)
         if response == 'no':
             return render_template('weather.html', alert=request.form.get('city'))
@@ -64,13 +60,11 @@ def get_weather():
             # Parse JSON data
             data = response.json()
             
-
-            main = data['main']
             # weather = data['weather'][0]
             
             return render_template('weather.html', row=data)
     else:
-        return render_template('weather.html')
+        return render_template('weather.html', newert=f'{lat}, {lon}')
 
 if __name__ == '__main__':
     app.run(debug=True)
