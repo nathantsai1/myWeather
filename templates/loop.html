@@ -3,7 +3,20 @@
 {% block weather %}
     <!-- shows all locations in loop -->
      <div class="container2">
+        <!-- choose city -->
+         <h1>Select city: </h1>
         <h1 class="item2">
+            {% for i in data %}
+                <div class="item2">
+                    <!-- split string like: 
+                     Sunnyvale, West Evelyn Avenue, Sunnyvale, 
+                     Santa Clara County, California, 94086, 
+                     United States -->
+                    <!-- {% set my_list = i['display_name'].split(',') %}
+                    <h1><a href="weather/"></a></h1> -->
+                    <h5></h5>
+                </div>
+            {% endfor %}
         </h1>
      </div>
 {% endblock %}
