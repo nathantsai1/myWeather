@@ -20,7 +20,7 @@
         }
         .boo {
             /* just adding background color */
-            background: repeating-conic-gradient(#CD001A, #7851A9);
+            background: repeating-conic-gradient(#a957c2, #7851A9);
             padding: 10px;
             margin: 10px;
             width: 99%;
@@ -45,6 +45,7 @@
             </form>
         </div>
         {% block weather %}
+
             <h3 class="loo">'the good weather App' has been waiting for you all along!
                 Enjoy the amazing benefits that come with this nifty app.
             </h3>
@@ -59,12 +60,13 @@
     {% elif newert %}
     <script>
         //  let alert = "{{ alert }}";
-         alert(`It seems like your city with (lat, lon)['{{ newert }}'] does not exist! Please change your lat / lon`);
+         alert(`It seems like your city with (lat, lon)[{{ newert }}] does not exist! Please change your lat / lon`);
     </script>
     <!-- or there is an empty string! -->
      {% elif empty %}
         <script>
             alert('Please enter a valid value into the city input')
+            // ask for location
         </script>
      {% endif %}
 {% endblock %}

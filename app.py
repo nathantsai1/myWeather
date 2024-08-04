@@ -1,6 +1,12 @@
 import requests
-from flask import Flask, jsonify, request, render_template
-
+from flask import (
+    Flask, 
+    request, 
+    render_template, 
+    abort,
+    redirect,
+    jsonify
+    )
 from helpers import (
     weather,
     location
@@ -42,29 +48,32 @@ def get_weather():
         if length > 1:
             # if there are multiple places, ask for which one to use
             return render_template("loop.html", length=length, data=data)
-        #return specific city information
-        return render_template('useless.html', row=data)        
+        #return specific city information if there is only one
+        data = data[0]
+        link = f"/weather/{ data['lat'] }/{ data['lon']}"
+        return redirect(link)       
     else:
         return render_template('weather.html')
 
-@app.route("/weather/<float:lat>/<float:lon>", methods=["POST", "GET"])
+@app.route("/weather/<path:lat>/<path:lon>", methods=["POST", "GET"])
 def lat_n_lon(lat, lon):
     # use for finding latitude/longitude, and weather associated with it
     # Send the request to OpenWeather API
-    if request.method == "POST":
-        response = weather(request.form.get('city'), api_key)
+    if request.method == "GET":
+        response = weather(lat, lon, api_key)
         if response == 'no':
-            return render_template('weather.html', alert=request.form.get('city'))
+            # reverse geocache/get city name
+            y = f'({lat}, {lon})'
+            return render_template('weather.html', newert=y)
         # Check if the request was successful
-        if response.status_code == 200:
+        else:
             # Parse JSON data
             data = response.json()
-            
             # weather = data['weather'][0]
-            
-            return render_template('weather.html', row=data)
+            return jsonify(data)
+            return render_template('forecast.html', data=data)
     else:
-        return render_template('weather.html', newert=f'{lat}, {lon}')
+        abort(404)
 
 if __name__ == '__main__':
     app.run(debug=True)
