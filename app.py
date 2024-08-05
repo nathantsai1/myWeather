@@ -11,7 +11,8 @@ from helpers import (
     weather,
     location,
     reverse_weather,
-    time_zone
+    time_zone,
+    eez
     )
 import datetime
 from zoneinfo import ZoneInfo
@@ -65,11 +66,15 @@ def get_weather():
         
         return render_template('weather.html')
 
-@app.route("/weather/<path:lat>/<path:lon>/<path:units>", methods=["POST", "GET"])
+@app.route("/weather/<path:lat>/<path:lon>/<path:units>", methods=["GET"])
 def lat_n_lon(lat, lon, units):
     # use for finding latitude/longitude, and weather associated with it
     # Send the request to OpenWeather API
-    if request.method == "GET":
+    if 1==1:
+        welcoming = eez(lat, lon, units, api_key)
+        # return welcoming[6]
+        return render_template('forecast.html', data=welcoming[0], lon=welcoming[1], lat=welcoming[2], today=welcoming[3], timing=welcoming[4], now=welcoming[5], united=welcoming[6])
+    else:
         # make sure units is actually a units
         if (units !="standard" and units != "metric" and units != "imperial"):
             return render_template('weather.html', units=units)
@@ -94,8 +99,11 @@ def lat_n_lon(lat, lon, units):
             # get time:
             hope = datetime.datetime.utcfromtimestamp(dataday['dt'] + dataday['timezone']).strftime('%Y-%m-%d %H:%M:%S')
             return render_template('forecast.html', data=data, lon=lon, lat=lat, today=dataday, timing=zoned, now=hope, united=units)
-    else:
-        abort(404)
+
+@app.route('/weather/<float:lat>/<float:lon>/<path:units>/<path:day>')
+def last(lat, lon, units, day):
+    return 1
+    return render_template('weather.html', alert='day')
 
 if __name__ == '__main__':
     app.run(debug=True)

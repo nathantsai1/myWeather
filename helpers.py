@@ -1,6 +1,6 @@
 import requests
 from flask import Flask, request, render_template, jsonify
-from datetime import datetime
+import datetime
 from zoneinfo import ZoneInfo
 
 def time_zone(lat, lon, api_key):
@@ -55,3 +55,30 @@ def reverse_geo(lat, lon, api_key):
     else:
         return 'no'
 
+# because this needs to go on two different sites
+def eez(lat, lon, units, api_key):
+    # make sure units is actually a units
+    if (units !="standard" and units != "metric" and units != "imperial"):
+        return 'units'
+    response = weather(lat, lon, units, api_key)
+    today = reverse_weather(lat, lon, units, api_key)
+    if response == 'no' or today == 'no':
+        # reverse geocache/get city name
+        y = f'({lat}, {lon})'
+        return 'no'
+    # Check if the request was successful
+    else:
+        api = 'Y6MYXZF20VQF'
+        timed = time_zone(lat, lon, api)
+        # Parse JSON data
+        dataday = today.json()
+        # dataday is today's 
+        data = response.json()
+        # data is the week
+        zoned = timed.json()
+        # return data
+        # and zoned is the time zone
+        # get time:
+        hope = datetime.datetime.utcfromtimestamp(dataday['dt'] + dataday['timezone']).strftime('%Y-%m-%d %H:%M:%S')
+        list = [data, lon, lat, dataday, zoned, hope, units]
+        return list

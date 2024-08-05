@@ -230,7 +230,7 @@
                 <div class="item3">
                   <h5 class="just">Wind direction and speed:</h5>
                   {% if today['wind']['deg']| float < 22.5 or today['wind']['deg']| float >= 337.5%}
-                  <h4>{{ today['wind']['speed'] }} {{ speed }} N</h4>
+                     <h4>{{ today['wind']['speed'] }} {{ speed }} N</h4>
                   <!-- Northeast -->
                   {% elif today['wind']['deg']| float > 22.4 and today['wind']['deg']| float < 67.5 %}
                      <h4>{{ today['wind']['speed'] }} {{ speed }} NE</h4>
@@ -263,33 +263,100 @@
       <!-- container is for the next day's weather -->
        <div class="boo">
       <div class="container5">
-         <a href="/adfadcsadfasd">
          <!-- give out the next day's weather -->
           <h1 class="just" style="color: #45cc2d">Daily forecast</h1>
          {% set nowed = now.split(' ') %}
          {% set list = [] %}
          {% set bool = 9 %}
-         <h1>{{data['list'][0]['dt_txt'] }}</h1>
           {% for i in data['list'] %}
-          <h1>{{ nowed[0] }}</h1><br>
           <!-- check that the date isn't today -->
             {% if not nowed[0] in i['dt_txt'] %}
             <!-- or another day -->
                {% if '12:' in i['dt_txt'] %}
                <!-- display that -->
                   {% set time = i['dt_txt'].split(' ') %}
-                  <div class="item4 style">
-                     <!-- show date -->
-                     <h3 class="just reddied">{{ time[0] }}</h3>
-                     <h3 style="opacity: 0">asdfhddfadfdsjhcajshdkfasdc</h3>
-                     <h3>{{ today['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
+                  <a href="/weather/{{ lat }}/{{ lon }}/{{ time[0] }}" style="text-decoration: none">
+                     <div class="item4 style">
+                        <!-- show date -->
+                        <h3 class="just reddied">{{ time[0] }}</h3>
+                        <h3 style="opacity: 0">asdfhddfadfdsjhcajshdkfasdc</h3>
+                        <h3><b>{{ today['main']['temp_max'] }}</b>/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
+                        <h3 style="opacity: 0">hcajshdkfasdc</h3>
 
-                  </div>
+                        <!-- cloudiness -->
+                        {% if '01' in today['weather'][0]['icon'] %}
+                           <!-- clear sky -->
+                           <img src="static/clear.png" alt="Clear skies" width="80">
+                           Made by BZZRINCANTATION
+                        {% elif '02' in today['weather'][0]['icon'] %}
+                           <!-- few clouds -->
+                           <img src="https://cdn-icons-png.freepik.com/512/10331/10331006.png" alt="few clouds" width="80">
+                           Icon by IconMarketPK
+                        {% elif '03' in today['weather'][0]['icon'] %}
+                           <!-- scattered clouds -->
+                           <img src="https://cdn-icons-png.freepik.com/512/10076/10076409.png" alt="scattered clouds" width="80">
+                           Icon by afif fuden
+                        {% elif '04' in today['weather'][0]['icon'] %}
+                           <!-- broken clouds -->
+                           <img src="https://cdn-icons-png.freepik.com/256/1116/1116455.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid" alt="broken clouds" width="80">
+                           Icon by Eucalyp
+                        {% elif '09' in today['weather'][0]['icon'] %}
+                           <!-- shower rain -->
+                           <img src="https://cdn-icons-png.freepik.com/256/13035/13035105.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid" alt="shower rain" width="80">
+                           Icon by VectorPortal
+                        {% elif '10' in today['weather'][0]['icon'] %}
+                           <!-- rainy -->
+                           <img src="https://cdn-icons-png.freepik.com/256/3026/3026267.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid" alt="rainy clouds" width="80">
+                           Icon by Freepik
+                        {% elif '11' in today['weather'][0]['icon'] %}
+                           <!-- thunderstorm -->
+                           <img src="https://cdn-icons-png.freepik.com/256/2722/2722880.png?semt=ais_hybrid" alt="thunderstorm" width="80">
+                           Icon by creative stall premium
+                        {% elif '13' in today['weather'][0]['icon'] %}
+                           <!-- snowy -->
+                           <img src="https://cdn-icons-png.freepik.com/256/6566/6566269.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid" alt="Snowy" width="80">
+                           Icon by Dreamcreateicons
+                        {% elif '50' in today['weather'][0]['icon'] %}
+                           <!-- misty -->
+                           <img src="https://cdn-icons-png.freepik.com/256/13882/13882726.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid" alt="Misty" width="80">
+                           Icon by Grafixpoint
+                        {% endif %}
+                        <h3 style="opacity: 0">dkfasdc</h3>
+                        <!-- and wind -->
+                        {% if today['wind']['deg']| float < 22.5 or today['wind']['deg']| float >= 337.5%}
+                           <h4>{{ today['wind']['speed'] }} {{ speed }} N</h4>
+                        <!-- Northeast -->
+                        {% elif today['wind']['deg']| float > 22.4 and today['wind']['deg']| float < 67.5 %}
+                           <h4>{{ today['wind']['speed'] }} {{ speed }} NE</h4>
+                        <!--  East -->
+                        {% elif today['wind']['deg']| float > 67.4 and today['wind']['deg']| float < 112.5 %}
+                           <h4>{{ today['wind']['speed'] }} {{ speed }} E</h4>
+                        <!-- Southeast -->
+                        {% elif today['wind']['deg']| float > 112.4 and today['wind']['deg']| float < 157.5%}
+                           <h4>{{ today['wind']['speed'] }} {{ speed }} SE</h4>
+                        <!-- South -->
+                        {% elif today['wind']['deg']| float > 157.4 and today['wind']['deg']| float < 202.5 %}
+                           <h4>{{ today['wind']['speed'] }} {{ speed }} S</h4>
+                        <!-- Southwest -->
+                        {% elif today['wind']['deg']| float > 202.4 and today['wind']['deg']| float < 247.5 %}
+                           <h4>{{ today['wind']['speed'] }} {{ speed }} SW</h4>
+                        <!-- West -->
+                        {% elif today['wind']['deg']| float > 247.4 and today['wind']['deg']| float < 292.5 %}
+                           <h4>{{ today['wind']['speed'] }} {{ speed }} W</h4>
+                        <!--  Northwest -->
+                        {% elif today['wind']['deg']| float > 292.4 and today['wind']['deg']| float < 337.5 %}
+                           <h4>{{ today['wind']['speed'] }} {{ speed }} NW</h4>
+                        {% endif %}
+
+                     </div>
+                  </a>
                 {% endif %}
             <!-- or already added -->
             {% endif %}
          {% endfor %}
-      </a>
+         <div class="container6">
+            <button type="button" class="btn btn-secondary"><a class="none" href="/{{ weather }}/{{ lat }}/{{ lon }}/{{ united }}/all">See next 6 days</a></button>
+         </div>
       </div>
    </div>
       <!-- Add all information-->
