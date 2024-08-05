@@ -31,7 +31,7 @@
 
 {% block main %}
     <div class="container1 boo">
-        <h2 class="hoo">This is the: weather page <br>
+        <h2 class="hoo">This is the: weather page<br>
             See your weather by searching below
         </h2>
         <!-- for extensions later -->
@@ -59,11 +59,11 @@
              alert(`It seems like city['{{ alert }}'] does not exist! Please change your spelling or city name`);
         </script>
     {% elif newert %}
-    <script>
-        //  let alert = "{{ alert }}";
-         alert(`It seems like your city with (lat, lon)[{{ newert }}] does not exist! Please change your coordinates`);
-    </script>
-    <!-- or there is an empty string! -->
+        <script>
+            //  let alert = "{{ alert }}";
+            alert(`It seems like your city with (lat, lon)[{{ newert }}] does not exist! Please change your coordinates`);
+        </script>
+        <!-- or there is an empty string! -->
      {% elif empty %}
         <script>
             alert('Please enter a valid value into the city input')
