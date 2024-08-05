@@ -89,7 +89,7 @@ def lat_n_lon(lat, lon, units):
             data = response.json()
             # data is the week
             zoned = timed.json()
-            # return dataday
+            return dataday
             # and zoned is the time zone
             # get time:
             hope = datetime.datetime.utcfromtimestamp(dataday['dt'] + dataday['timezone']).strftime('%Y-%m-%d %H:%M:%S')
