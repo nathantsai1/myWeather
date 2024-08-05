@@ -59,13 +59,13 @@ def reverse_geo(lat, lon, api_key):
 def eez(lat, lon, units, api_key):
     # make sure units is actually a units
     if (units !="standard" and units != "metric" and units != "imperial"):
-        return 'units'
+        return ['units', units]
     response = weather(lat, lon, units, api_key)
     today = reverse_weather(lat, lon, units, api_key)
     if response == 'no' or today == 'no':
         # reverse geocache/get city name
         y = f'({lat}, {lon})'
-        return 'no'
+        return ['no', y]
     # Check if the request was successful
     else:
         api = 'Y6MYXZF20VQF'
@@ -82,3 +82,56 @@ def eez(lat, lon, units, api_key):
         hope = datetime.datetime.utcfromtimestamp(dataday['dt'] + dataday['timezone']).strftime('%Y-%m-%d %H:%M:%S')
         list = [data, lon, lat, dataday, zoned, hope, units]
         return list
+
+def icon(today):
+    # return '01' in today['weather'][0]['icon']
+    if '01' in today['weather'][0]['icon']:
+        #    <!-- clear sky -->
+        link = ["/static/clear.png", 'Clear skies', 'Made by BZZRINCANTATION']
+    elif '02' in today['weather'][0]['icon']:
+        #    <!-- few clouds -->
+        link = ["https://cdn-icons-png.freepik.com/512/10331/10331006.png", 'Few clouds', 'Icon by BZZRINCANTATION']
+    elif '03' in today['weather'][0]['icon']:
+        # <!-- scattered clouds -->
+        link = ["https://cdn-icons-png.freepik.com/512/10076/10076409.png", 'scattered clouds', 'Icon by afif fuden']
+    elif '04' in today['weather'][0]['icon']:
+        # <!-- broken clouds -->
+        link = ["https://cdn-icons-png.freepik.com/256/1116/1116455.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid", 'broken clouds', 'Icon by Eucalyp']
+    elif '09' in today['weather'][0]['icon']:
+        #    <!-- shower rain -->
+        link = ["https://cdn-icons-png.freepik.com/256/13035/13035105.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid", 'shower rain', 'Icon by VectorPortal']
+    elif '10' in today['weather'][0]['icon']:
+        #    <!-- rainy -->
+        link = ["https://cdn-icons-png.freepik.com/256/3026/3026267.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid", 'rainy', 'Icon by Freepik']
+    elif '11' in today['weather'][0]['icon']:
+        #    <!-- thunderstorm 
+        link = ["https://cdn-icons-png.freepik.com/256/2722/2722880.png?semt=ais_hybrid", 'thunderstorm', 'Icon by creative stall premium']
+    elif '13' in today['weather'][0]['icon']:
+        #    <!-- snowy -
+        link = ["https://cdn-icons-png.freepik.com/256/6566/6566269.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid", 'snowy', 'Icon by Dreamcreateicons']
+    elif '50' in today['weather'][0]['icon']:
+        #    <!-- misty -->
+        link = ["https://cdn-icons-png.freepik.com/256/13882/13882726.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid", 'misty', 'Icon by Grafixpoint']
+    else:
+        link = ['accident']
+
+    # then get weather 
+    hi = float(today['wind']['deg'])
+    if hi < 22.5 or hi >= 337.5:
+        link.append('N')
+    elif hi >= 22.5 and hi < 67.5:
+        link.append('NE')
+    elif hi >= 67.5 and hi < 112.5:
+        link.append('E')
+    elif hi >= 112.5 and hi < 157.5:
+        link.append('SE')
+    elif hi >= 157.5 and hi < 202.5:
+        link.append('S')
+    elif hi >= 202.5 and hi < 247.5:
+        link.append('SW')
+    elif hi >= 247.5 and hi < 292.5:
+        link.append('W')
+    elif hi >= 292.5 and hi < 337.5:
+        link.append('NW')
+    return link
+   

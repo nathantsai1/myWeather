@@ -12,7 +12,8 @@ from helpers import (
     location,
     reverse_weather,
     time_zone,
-    eez
+    eez,
+    icon
     )
 import datetime
 from zoneinfo import ZoneInfo
@@ -66,44 +67,31 @@ def get_weather():
         
         return render_template('weather.html')
 
+
 @app.route("/weather/<path:lat>/<path:lon>/<path:units>", methods=["GET"])
 def lat_n_lon(lat, lon, units):
     # use for finding latitude/longitude, and weather associated with it
     # Send the request to OpenWeather API
-    if 1==1:
         welcoming = eez(lat, lon, units, api_key)
         # return welcoming[6]
-        return render_template('forecast.html', data=welcoming[0], lon=welcoming[1], lat=welcoming[2], today=welcoming[3], timing=welcoming[4], now=welcoming[5], united=welcoming[6])
-    else:
-        # make sure units is actually a units
-        if (units !="standard" and units != "metric" and units != "imperial"):
-            return render_template('weather.html', units=units)
-        response = weather(lat, lon, units, api_key)
-        today = reverse_weather(lat, lon, units, api_key)
-        if response == 'no' or today == 'no':
+        if welcoming[0] == 'no':
             # reverse geocache/get city name
-            y = f'({lat}, {lon})'
-            return render_template('weather.html', newert=y)
-        # Check if the request was successful
-        else:
-            api = 'Y6MYXZF20VQF'
-            timed = time_zone(lat, lon, api)
-            # Parse JSON data
-            dataday = today.json()
-            # dataday is today's 
-            data = response.json()
-            # data is the week
-            zoned = timed.json()
-            # return data
-            # and zoned is the time zone
-            # get time:
-            hope = datetime.datetime.utcfromtimestamp(dataday['dt'] + dataday['timezone']).strftime('%Y-%m-%d %H:%M:%S')
-            return render_template('forecast.html', data=data, lon=lon, lat=lat, today=dataday, timing=zoned, now=hope, united=units)
+            return render_template('weather.html', newert=welcoming[1])
+        elif welcoming[0] == 'units':
+            return render_template('weather.html', units=welcoming[1])
+        datatize = icon(welcoming[3])
+        return render_template('forecast.html', data=welcoming[0], lon=welcoming[1], lat=welcoming[2], today=welcoming[3], timing=welcoming[4], now=welcoming[5], united=welcoming[6], need=datatize)
 
-@app.route('/weather/<float:lat>/<float:lon>/<path:units>/<path:day>')
-def last(lat, lon, units, day):
-    return 1
-    return render_template('weather.html', alert='day')
-
+@app.route('/weather/<path:lat>/<path:lon>/<path:units>/<path:day>', methods=['GET'])
+def last(lat, lon, units, day):   
+    # basically the same as above, but pass in the 'day' argument
+    welcoming = eez(lat, lon, units, api_key)
+    if welcoming[0] == 'no':
+        # reverse geocache/get city name
+        return render_template('weather.html', newert=welcoming[1])
+    elif welcoming[0] == 'units':
+        return render_template('weather.html', units=welcoming[1])
+    datatize = icon(welcoming[3])
+    return render_template('forecast.html', data=welcoming[0], lon=welcoming[1], lat=welcoming[2], today=welcoming[3], timing=welcoming[4], now=welcoming[5], united=welcoming[6], need=datatize, special=day)
 if __name__ == '__main__':
     app.run(debug=True)
