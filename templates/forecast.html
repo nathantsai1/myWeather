@@ -87,7 +87,7 @@
 /* items */
 .item3 {
    display: flex;
-   width: 45%;
+   width: 50%;
    color: #45cc2d;
    flex-direction: column;
    justify-content: center;
@@ -96,6 +96,22 @@
    margin: 6px;
    border: 2px solid blue;
    grid-template-columns: repeat(5, 1fr);
+}
+
+.item4 {
+   display: flex;
+   width: 50%;
+   color: #45cc2d;
+   flex-direction: row;
+   justify-content: start;
+   align-items: center;
+   padding: 10px;
+   margin: 6px;
+   border: 2px solid beige;
+   /* grid-template-columns: repeat(5, 1fr); */
+}
+.style {
+   width: 98.5%;
 }
 </style>
 {% endblock %}
@@ -199,6 +215,12 @@
                   <h5>Description: {{ today['weather'][0]['description'] }}</h5>
                </div>
             </div>
+            <div class="container6">
+               <div class="item3">
+                  <h5 class="just">Probability of precipitation:</h5>
+                  <h3>{{ today['pop'] | int * 100 }}%</h3>
+               </div>
+            </div>
             <hr>
             <!-- windi(pronouced like "wendeee")ness -->
             <h1 class="reddied">Wind:</h1>
@@ -238,7 +260,38 @@
          </div>
       <!-- div below is for the outside green container  -->
       </div>
+      <!-- container is for the next day's weather -->
+       <div class="boo">
+      <div class="container5">
+         <a href="/adfadcsadfasd">
+         <!-- give out the next day's weather -->
+          <h1 class="just" style="color: #45cc2d">Daily forecast</h1>
+         {% set nowed = now.split(' ') %}
+         {% set list = [] %}
+         {% set bool = 9 %}
+         <h1>{{data['list'][0]['dt_txt'] }}</h1>
+          {% for i in data['list'] %}
+          <h1>{{ nowed[0] }}</h1><br>
+          <!-- check that the date isn't today -->
+            {% if not nowed[0] in i['dt_txt'] %}
+            <!-- or another day -->
+               {% if '12:' in i['dt_txt'] %}
+               <!-- display that -->
+                  {% set time = i['dt_txt'].split(' ') %}
+                  <div class="item4 style">
+                     <!-- show date -->
+                     <h3 class="just reddied">{{ time[0] }}</h3>
+                     <h3 style="opacity: 0">asdfhddfadfdsjhcajshdkfasdc</h3>
+                     <h3>{{ today['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
 
+                  </div>
+                {% endif %}
+            <!-- or already added -->
+            {% endif %}
+         {% endfor %}
+      </a>
+      </div>
+   </div>
       <!-- Add all information-->
       
 {% endblock %}
