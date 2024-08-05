@@ -12,21 +12,29 @@
    font-family: "Lucida Console", "Courier New", monospace;
    grid-column: 5;
  }
+
+ .reddied {
+   color: #63de31;
+ }
 </style>
 {% endblock %}
 <!-- shows forecast, assuming there is data -->
 {% block weather %}
     <!-- a little about this page -->
-     <h1>Weather for: {{ data['city']['name'] }}<br></h1>
+     <h1 class="reddied">Weather for: {{ data['city']['name'] }}<br></h1>
      <h3>Updated as of: '{{ now }}' local time</h3>
         <hr>
    <!-- use F, C, or K -->
+    <!-- and the wind speed -->
     {% if united == 'standard' %}
       {% set my_unit = '° K' %}
+      {% set speed = 'mph' %}
     {% elif united == 'metric' %}
       {% set my_unit = '° C' %}
+      {% set speed = 'm/s' %}
     {% elif united == 'imperial' %}
       {% set my_unit = '° F' %}
+      {% set speed = 'm/s' %}
     {% endif %}
     <!-- add three options -->
     <h2>Change units of measure<hr></h2>
@@ -43,10 +51,51 @@
             <h5 class="just">Feels like:<br></h5>
             <h3>{{ today['main']['feels_like'] }}{{ my_unit }}</h3>
          </div>
+         <hr>
+         <div class="item3">
+            <h5 class="just">Temperature now:<br></h5>
+            <h3>{{ today['main']['temp'] }}{{ my_unit }}</h3>
+         </div>
+         <div class="item3">
+            <h5 class="just">Max temperature: <br></h5>
+            <h3>{{ today['main']['temp_max'] }}{{ my_unit }}</h3>
+         </div>
+         <div class="item3">
+            <h5 class="just">Minimum temperature: <br></h5>
+            <h3>{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
+         </div>
+         <hr>
+         <!-- wind! -->
+          <h2>Wind:</h2>
+          <!-- wind direction -->
+
+          <!-- North -->
+          {% if today['wind']['deg']| float < 22.5 or today['wind']['deg']| float >= 337.5%}
+            <h4>{{ today['wind']['speed'] }} {{ speed }} N</h4>
+         <!-- Northeast -->
+          {% elif today['wind']['deg']| float > 22.4 and today['wind']['deg']| float < 67.5 %}
+            <h4>{{ today['wind']['speed'] }} {{ speed }} NE</h4>
+         <!--  East -->
+          {% elif today['wind']['deg']| float > 67.4 and today['wind']['deg']| float < 112.5 %}
+            <h4>{{ today['wind']['speed'] }} {{ speed }} E</h4>
+         <!-- Southeast -->
+         {% elif today['wind']['deg']| float > 112.4 and today['wind']['deg']| float < 157.5%}
+            <h4>{{ today['wind']['speed'] }} {{ speed }} SE</h4>
+         <!-- South -->
+         {% elif today['wind']['deg']| float > 157.4 and today['wind']['deg']| float < 202.5 %}
+            <h4>{{ today['wind']['speed'] }} {{ speed }} S</h4>
+         <!-- Southwest -->
+         {% elif today['wind']['deg']| float > 202.4 and today['wind']['deg']| float < 247.5 %}
+            <h4>{{ today['wind']['speed'] }} {{ speed }} SW</h4>
+         <!-- West -->
+         {% elif today['wind']['deg']| float > 247.4 and today['wind']['deg']| float < 292.5 %}
+            <h4>{{ today['wind']['speed'] }} {{ speed }} W</h4>
+         <!--  Northwest -->
+         {% elif today['wind']['deg']| float > 292.4 and today['wind']['deg']| float < 337.5 %}
+            <h4>{{ today['wind']['speed'] }} {{ speed }} NW</h4>
+          {% endif %}
       </div>
+
       <!-- Add all information -->
-      <script>
-         hello = window.location.href
-      </script>
       
 {% endblock %}
