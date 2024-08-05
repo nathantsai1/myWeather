@@ -106,9 +106,51 @@
             <h5 class="just">Minimum temperature: <br></h5>
             <h3>{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
          </div>
-         <img src="static/clear.png" alt="Clear skies. Icon by BZZRINCANTATION">
-         <img src="https://www.freepik.com/icon/clear-sky_3032894" alt="clear skies. Made by BZZRINCANTATION">
          <hr>
+         <!-- cloudy? -->
+          <h2>Cloudiness:</h2>
+          <!-- give icons -->
+          <h1>{{ today['weather']}}</h1>
+
+         <div class="item3">
+            <h1>{{ today['weather'][0]['description'] }}</h1>
+            {% if today['weather'][0]['description'] == "clear sky" %}
+               <!-- clear sky -->
+               <img src="static/clear.png" alt="Clear skies. Icon by BZZRINCANTATION">
+               <h6>Made by Freepik</h6>
+            {% elif today['weather'][0]['description'] == "few clouds" %}
+            <!-- few clouds -->
+               <img src="https://cdn-icons-png.freepik.com/512/10331/10331006.png" width="500" alt="few clouds">
+               <h6>Icon by IconMarketPK</h6>
+            {% elif today['weather'][0]['description'] == "scattered clouds" %}
+            <!-- scattered clouds -->
+               <img src="https://cdn-icons-png.freepik.com/512/10076/10076409.png" alt="scattered clouds">
+               <h6>Icon by afif fuden</h6>
+            {% elif today['weather'][0]['description'] == "broken clouds" %}
+            <!-- broken clouds -->
+               <img src="https://cdn-icons-png.freepik.com/256/1116/1116455.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid" alt="broken clouds">
+               <h6>Icon by Eucalyp</h6>
+            {% elif today['weather'][0]['description'] == "shower rain" %}
+               <img src="https://cdn-icons-png.freepik.com/256/13035/13035105.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid" alt="shower rain">
+               <h6>Icon by VectorPortal</h6>
+            {% elif today['weather'][0]['description'] == "rain" %}
+               <!-- rainy -->
+               <img src="https://cdn-icons-png.freepik.com/256/3026/3026267.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid" alt="rainy clouds">
+               <h6>Icon by Freepik</h6>
+            {% elif today['weather'][0]['description'] == "thunderstorm" %}
+               <!-- thunderstorm -->
+               <img src="https://cdn-icons-png.freepik.com/256/2722/2722880.png?semt=ais_hybrid" alt="thunderstorm">
+               <h6>Icon by creative stall premium</h6>
+            {% elif today['weather'][0]['description'] == "snow" %}
+               <!-- snowy -->
+               <img src="https://cdn-icons-png.freepik.com/256/6566/6566269.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid" alt="sSnowy">
+               <h6>Icon by Dreamcreateicons</h6>
+            {% elif today['weather'][0]['description'] == "mist" %}
+               <!-- misty -->
+               <img src="https://cdn-icons-png.freepik.com/256/13882/13882726.png?ga=GA1.1.1142624802.1722824111&semt=ais_hybrid" alt="Misty">
+               <h6>Icon by Grafixpoint</h6>
+            {% endif %}
+         </div>
          <!-- wind! -->
           <h2>Wind:</h2>
           <!-- wind direction -->
