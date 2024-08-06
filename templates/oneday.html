@@ -1,5 +1,16 @@
 {% extends "weather.html" %}
 
+{% block stile %}
+   <style>
+      /* color schemes for day/night */
+      .light {
+         color: #EEAE94;
+      }
+      .dark {
+         color: #CA5A4B;
+      }
+   </style>
+{% endblock %}
 {% block weather %}
     <!--a little about this page -->
     <!-- almost the same as forecast html -->
@@ -26,10 +37,6 @@
      <hr>
      <h2 class="green">5 day weather forecast</h2>
      <!-- preliminary stuff -->
-     {% set nowed = now.split(' ') %}
-     {% set booled = 'yes' %}
-     {% set special = special.strip() %}
-     {% set speeded = special.split('-') %}
 
      <!-- display before 'todays' weaather -->
      {% for i in before %}
@@ -55,49 +62,53 @@
     <h2 class="green">Weather for {{ special }}:</h2>
     <div class="container6">
       <div class="mini">
-         <h3 class="reddied">{{ special }} | Day</h3>
-         <h1 class="reddied">Temperature:</h1>
+         <h3 class="light">{{ special }} | Day</h3>
+         <h1 class="light">Temperature:</h1>
          <div class="container6">
             <div class="item5">
-               <h5 class="just">Feels like: <h3>{{ morning['main']['feels_like'] }}{{ my_unit }}</h3></h5>
+               <h5 class="just light">Feels like: <h3>{{ morning['main']['feels_like'] }}{{ my_unit }}</h3></h5>
             </div>
             <div class="item5">
-               <h5 class="just">Temperature:<br></h5>
+               <h5 class="just light">Temperature:<br></h5>
                <h3>{{ morning['main']['temp'] }}{{ my_unit }}</h3>
             </div>
             </div>
          <div class="container6">
             <div class="item5">
-               <h5 class="just">Max/Min temperature: <br></h5>
+               <h5 class="just light">Max/Min temperature: <br></h5>
                   <h3>{{ morning['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
             </div>
             <div class="item5">
-               <h5 class="just">Humidity: <br></h5>
+               <h5 class="just light">Humidity: <br></h5>
                <h3>{{ morning['main']['humidity'] }}%</h3>
                </div>
          </div>
          <!-- cloudiness -->
-         <h1 class="reddied">Cloudiness:</h1>
+         <h1 class="reddied light">Cloudiness:</h1>
          <div class="container6">
             <div class="item5">
                <!-- the logo -->
-               <img src="{{ need[0] }}" alt="{{ need[1] }}" width="50">
-               <h1 class="tiny">{{ need[2] }}</h1>
-               <h5>Description: {{ today['weather'][0]['description'] }}</h5>
+               <div class="height">
+                  <img src="{{ need[0] }}" alt="{{ need[1] }}" width="50">
+                  <h1 class="tiny black">{{ need[2] }}</h1>
+                </div>
+                <div class="height">
+                  <h5 class="light">Description: <h5><!-- darkening only 'description' -->{{ morning['weather'][0]['description'] }}</h5></h5>
+                </div>
                <!-- more cloud stuff -->
             </div>
             <div class="item5">
-               <h5 class="just">Probability of precipitation:</h5>
+               <h5 class="just light">Probability of precipitation:</h5>
                <h3>{{ morning['pop'] | int * 100 }}%</h3>
                <h5 style="opacity: 0">.</h5>
             </div>
          </div>
          <!-- windi(pronouced like "wendeee")ness -->
-         <h1 class="reddied">Wind:</h1>
+         <h1 class="light">Wind:</h1>
          <div class="container6">
          <!-- wind direction -->
                <div class="item5">
-                  <h5 class="just">Wind direction and speed:</h5>
+                  <h5 class="just light">Wind direction and speed:</h5>
                   <h4>{{ morning['wind']['speed'] }} {{ speed }} {{ need[3] }}</h4>
                </div>
          <!-- div below is for the inside green container  -->
@@ -106,49 +117,54 @@
       </div>
 
       <div class="mini">
-         <h3 class="reddied">{{ special }} | Night</h3>
-         <h1 class="reddied">Temperature:</h1>
+         <h3 class="dark">{{ special }} | Night</h3>
+         <h1 class="dark">Temperature:</h1>
          <div class="container6">
             <div class="item5">
-               <h5 class="just">Feels like: <h3>{{ evening['main']['feels_like'] }}{{ my_unit }}</h3></h5>
+               <h5 class="just dark">Feels like: <h3>{{ evening['main']['feels_like'] }}{{ my_unit }}</h3></h5>
             </div>
             <div class="item5">
-               <h5 class="just">Temperature:<br></h5>
+               <h5 class="just dark">Temperature:<br></h5>
                <h3>{{ morning['main']['temp'] }}{{ my_unit }}</h3>
             </div>
             </div>
          <div class="container6">
             <div class="item5">
-               <h5 class="just">Max/Min temperature: <br></h5>
-                  <h3>{{ morning['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
+               <h5 class="just dark">Max/Min temperature: <br></h5>
+               <h5>{{ morning['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h4>
             </div>
             <div class="item5">
-               <h5 class="just">Humidity: <br></h5>
+               <h5 class="just dark">Humidity: <br></h5>
                <h3>{{ morning['main']['humidity'] }}%</h3>
                </div>
          </div>
          <!-- cloudiness -->
-         <h1 class="reddied">Cloudiness:</h1>
+         <h1 class="dark">Cloudiness:</h1>
          <div class="container6">
             <div class="item5">
                <!-- the logo -->
-               <img src="{{ need[0] }}" alt="{{ need[1] }}" width="50">
-               <h1 class="tiny">{{ need[2] }}</h1>
-               <h5>Description: {{ today['weather'][0]['description'] }}</h5>
+                <!-- hieght puts objects over and under each other -->
+                <div class="height">
+                  <img src="{{ need[0] }}" alt="{{ need[1] }}" width="50">
+                  <h1 class="tiny black">{{ need[2] }}</h1>
+                </div>
+                <div class="height">
+                  <h5 class="dark">Description: <h5><!-- darkening only 'description' -->{{ morning['weather'][0]['description'] }}</h5></h5>
+                </div>
                <!-- more cloud stuff -->
             </div>
             <div class="item5">
-               <h5 class="just">Probability of precipitation:</h5>
+               <h5 class="just dark">Probability of precipitation:</h5>
                <h3>{{ morning['pop'] | int * 100 }}%</h3>
                <h5 style="opacity: 0">.</h5>
             </div>
          </div>
          <!-- windi(pronouced like "wendeee")ness -->
-         <h1 class="reddied">Wind:</h1>
+         <h1 class="dark">Wind:</h1>
          <div class="container6">
          <!-- wind direction -->
                <div class="item5">
-                  <h5 class="just">Wind direction and speed:</h5>
+                  <h5 class="just dark">Wind direction and speed:</h5>
                   <h4>{{ morning['wind']['speed'] }} {{ speed }} {{ need[3] }}</h4>
                </div>
          <!-- div below is for the inside green container  -->
@@ -157,10 +173,6 @@
       </div>
       <!-- and the invisible one too! -->
    </div>
-   {% set bool = 'yes' %}
-   {% set i_need = speeded[0] | float, speeded[1] | float, speeded[2] | float%}
-   {{ i_need[0] }}speeded
-   {% set context = {'hi': '?'} %}
 
    <!-- same as above but for days after -->
    {% for i in after %}
@@ -173,9 +185,11 @@
                <h3><b>{{ today['main']['temp_max'] }}</b>/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
                <h3 style="opacity: 0">hcajshdkfasdc</h3>
                <!-- cloudiness -->
-               <img src="{{ need[0] }}" alt="{{ need[1] }}" width="50">
-               {{ need[2] }} 
-               <h3 style="opacity: 0">dkfasdc</h3>
+                <div class="height">
+                  <img src="{{ need[0] }}" alt="{{ need[1] }}" width="50">
+                  <h1 class="tiny black">{{ need[2] }}</h1>
+                </div>
+                <h3 style="opacity: 0">dkfasdc</h3>
                <!-- and wind -->
                <h4>{{ today['wind']['speed'] }} {{ speed }} {{ need[3] }}</h4>
             </div>
