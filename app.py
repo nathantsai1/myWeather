@@ -92,6 +92,11 @@ def last(lat, lon, units, day):
     elif welcoming[0] == 'units':
         return render_template('weather.html', units=welcoming[1])
     datatize = icon(welcoming[3])
-    return render_template('forecast.html', data=welcoming[0], lon=welcoming[1], lat=welcoming[2], today=welcoming[3], timing=welcoming[4], now=welcoming[5], united=welcoming[6], need=datatize, special=day)
+    if day == 'all':
+        return jsonify(welcoming[0])
+        return render_template('all.html', data=welcoming[0], lon=welcoming[1], lat=welcoming[2], today=welcoming[3], timing=welcoming[4], now=welcoming[5], united=welcoming[6], need=datatize, special=day)
+    else:        
+        # return jsonify(welcoming[0])
+        return render_template('oneday.html', morning=welcoming[3], data=welcoming[0], lon=welcoming[1], lat=welcoming[2], today=welcoming[3], timing=welcoming[4], now=welcoming[5], united=welcoming[6], need=datatize, special=day)
 if __name__ == '__main__':
     app.run(debug=True)

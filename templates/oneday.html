@@ -1,0 +1,100 @@
+{% extends "weather.html" %}
+
+{% block weather %}
+    <!--a little about this page -->
+    <!-- almost the same as forecast html -->
+    <h1 class="reddied">Weather for: {{ data['city']['name'] }}<br></h1>
+    <h3 class="green">Updated as of: '{{ now }}' local time</h3>
+    <!-- degrees and wind measurements -->
+    {% if united == 'standard' %}
+      {% set my_unit = '° K' %}
+      {% set speed = 'mph' %}
+    {% elif united == 'metric' %}
+      {% set my_unit = '° C' %}
+      {% set speed = 'm/s' %}
+    {% elif united == 'imperial' %}
+      {% set my_unit = '° F' %}
+      {% set speed = 'm/s' %}
+    {% endif %}
+    <!-- change measurements -->
+    <h2 class="green">Change units of measure<hr></h2>
+     <div class="container7">
+        <button type="button" style="grid-column: 1" class="btn btn-primary"><a class="none" style="color: white" href="/weather/{{lat}}/{{lon}}/standard">Standard</a></button>
+        <button type="button" style="grid-column: 2" class="btn btn-success "><a class="none"href="/weather/{{lat}}/{{lon}}/metric">Metric</a></button>
+        <button type="button" style="grid-column: 3" class="btn btn-danger"><a class="none" href="/weather/{{lat}}/{{lon}}/imperial">Imperial</a></button>
+     </div>
+
+    <!-- displaying todays weather -->
+    <h2 class="green">Weather for {{ special }}:</h2>
+    <!-- find 'today' -->
+     {% for i in data['list'] %}
+        {{ i['dt_txt']}}
+        {% if special in i['dt_txt'] %}
+            <!-- if is noon -->
+             {% if '12:00:00' in i['dt_text'] %}
+                {% set morning = i %}
+                <h2>hello</h2>
+                <!-- or night, set to morning/evening respectively -->
+             {% elif '9:00:00' in i['dt_text'] %}
+                {% set evening = i %}
+             {% endif %}
+        {% endif %}
+     {% endfor %}
+    <div class="mini">
+       <h1 class="reddied">Temperature:</h1>
+       <div class="container6">
+          <div class="item3">
+             <h5 class="just">Feels like:<br></h5>
+             <h3>{{ morning['main']['feels_like'] }}{{ my_unit }}</h3>
+          </div>
+          <div class="item3">
+             <h5 class="just">Temperature:<br></h5>
+             <h3>{{ morning['main']['temp'] }}{{ my_unit }}</h3>
+          </div>
+           </div>
+       <div class="container6">
+          <div class="item3">
+             <h5 class="just">Max/Min temperature: <br></h5>
+                <h3>{{ morning['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
+          </div>
+          <div class="item3">
+             <h5 class="just">Humidity: <br></h5>
+            <h3>{{ morning['main']['humidity'] }}%</h3>
+            </div>
+       </div>
+       <hr>
+        <!-- cloudiness -->
+       <h1 class="reddied">Cloudiness:</h1>
+       <div class="container6">
+          <div class="item3">
+             <!-- the logo -->
+                <img src="{{ need[0] }}" alt="{{ need[1] }}" width="50">
+             {{ need[2] }} 
+             <!-- more cloud stuff -->
+          </div>
+            <div class="item3">
+                <h5>Description: {{ morning['weather'][0]['description'] }}</h5>
+            </div>
+        </div>
+       <div class="container6">
+          <div class="item3">
+             <h5 class="just">Probability of precipitation:</h5>
+                <h3>{{ morning['pop'] | int * 100 }}%</h3>
+            </div>
+        </div>
+        <hr>
+        <!-- windi(pronouced like "wendeee")ness -->
+        <h1 class="reddied">Wind:</h1>
+        <div class="container6">
+        <!-- wind direction -->
+            <div class="item3">
+                 <h5 class="just">Wind direction and speed:</h5>
+                <h4>{{ morning['wind']['speed'] }} {{ speed }} {{ need[3] }}</h4>
+            </div>
+        <!-- div below is for the inside green container  -->
+        </div>
+     <!-- div below is for the outside green container  -->
+     </div>
+
+
+{% endblock %}

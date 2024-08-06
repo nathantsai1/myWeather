@@ -1,108 +1,5 @@
 {% extends "weather.html" %}
 
-{% block stile %}
-<style>
-   .none {
-   color: white;
-   text-decoration: none;
-   border-width: 0px;
- }
-
- .just {
-   font-family: "Lucida Console", "Courier New", monospace;
-   grid-column: 5;
- }
-
- .reddied {
-   color: #63de31;
- }
-
- .black {
-   color: #000;
- }
-
- /* containers */
- .container5 {
-   display: flex;
-   width: 95%;
-   flex-direction: column;
-   justify-content: center;
-   align-items: start;
-   /* padding: 10px; */
-   margin: 6px;
-   border: 4px solid greenyellow;
-   border-radius: 5px;
-}
-
-.container6 {  
-   display: flex;
-   width: 100%;
-   flex-direction: row;
-   justify-content: center;
-   align-items: start;
-   padding: 3px;
-   margin: 0px;
-}
-
-.container7 {  
-   display: flex;
-   width: 40%;
-   flex-direction: row;
-   justify-content: center;
-   align-items: start;
-   padding: 3px;
-   margin: 0px;
-   grid-template-columns: repeat(3, 1fr);
-   border: 2px solid greenyellow;
-}
-
-.justacontainer {
-   display: flex;
-   width: 98.5%;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   padding: 10px;
-   margin: 6px;
-   border: 4px solid #fde7fe;
-   border-radius: 5px;
-}
-
-/* items */
-.item3 {
-   display: flex;
-   width: 50%;
-   color: #45cc2d;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   padding: 10px;
-   margin: 6px;
-   border: 2px solid #FEF250;
-   grid-template-columns: repeat(5, 1fr);
-}
-
-.item4 {
-   display: flex;
-   width: 50%;
-   color: #45cc2d;
-   flex-direction: row;
-   justify-content: start;
-   align-items: center;
-   padding: 10px;
-   margin: 6px;
-   border: 2px solid beige;
-   /* grid-template-columns: repeat(5, 1fr); */
-}
-.style {
-   width: 98.5%;
-}
-
-.green {
-   color: #FFCC66;
-}
-</style>
-{% endblock %}
 <!-- shows forecast, assuming there is data -->
 {% block weather %}
     <!--a little about this page -->
@@ -131,7 +28,7 @@
      </div>
 
      <!-- display todays weather -->
-      <h2 class="green">Weather today:</h2>
+         <h2 class="green">Weather today:</h2>
       <div class="container5">
          <div class="justacontainer">
             <h1 class="reddied">Temperature:</h1>
@@ -205,7 +102,7 @@
                {% if '12:' in i['dt_txt'] %}
                <!-- display that -->
                   {% set time = i['dt_txt'].split(' ') %}
-                  <a href="/weather/{{ lat }}/{{ lon }}/{{ time[0] }}" style="text-decoration: none">
+                  <a href="/weather/{{ lat }}/{{ lon }}/{{ united }}/{{ time[0] }}" style="text-decoration: none">
                      <div class="item4 style">
                         <!-- show date -->
                         <h3 class="just reddied">{{ time[0] }}</h3>
@@ -226,7 +123,7 @@
             {% endif %}
          {% endfor %}
          <div class="container6">
-            <button type="button" class="btn btn-secondary"><a class="none" href="/weather/{{ lat }}/{{ lon }}/{{ united }}/all">See next 6 days</a></button>
+            <button type="button" class="btn btn-secondary"><a class="none" href="/weather/{{ lat }}/{{ lon }}/{{ united }}/all">See next 5 days</a></button>
          </div>
       </div>
    </div>
