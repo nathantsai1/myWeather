@@ -29,13 +29,14 @@
      {% set nowed = now.split(' ') %}
      {% set booled = 'yes' %}
      {% set special = special.strip() %}
+     {% set speeded = special.split('-') %}
+
      <!-- display before 'todays' weaather -->
      {% for i in data['list'] %}
      <!-- check that the date is before the new 'today' -->
       {% set ugg = i['dt_txt'].split(' ') %}
       {% set ugh = ugg[0].split('-') %}
 
-      {% set speeded = special.split('-') %}
          {% if speeded[0] <= ugh[0] and speeded[1] <= ugh[1] and speeded[2] <= ugh[2] %}
             {% set booled = 'no' %}
          {% elif booled == 'yes' %}
@@ -197,26 +198,34 @@
       <!-- and the invisible one too! -->
    </div>
    {% set bool = 'yes' %}
-   {% for i in }<<<<<<<<<<<<<<<<<<<<<<<<<<<<,
+   {% set i_need = speeded[0] | float, speeded[1] | float, speeded[2] | float%}
+   {{ i_need[0] }}speeded
+   {% set context = {'hi': '?'} %}
+
    <!-- same as above but for days after -->
    {% for i in data['list'] %}
+      {% set new_list = [] %}
    <!-- check that the date is before the new 'today' -->
       {% set ugg = i['dt_txt'].split(' ') %}
       {% set ugh = ugg[0].split('-') %}
-      {{ speeded }}/{{ ugh}}
+      {% set new_list = ugh[0] | float, ugh[1] | float, ugh[2] | float%}
+      {{ new_list}}new_list
+      <h1>{{speeded[0]}}</h1>
+      {{ i_need }}/{{  new_list}}
 
-      {% set speeded = special.split('-') %}
-         {% if (speeded[0] | float) >= (ugh[0] | float) and (speeded[1] | float) >= (ugh[1] | float) and (speeded[2] | float) >= (ugh[2] | float) %}
-            {% set booled = 'no' %}
-            
-         {% elif booled == 'no' %}
-            <!-- check that the date isn't today -->
-            {% if not nowed[0] in i['dt_txt'] %}
-               <!-- and is before new 'today' -->
+         {% if i_need[0] == new_list[0] | float and i_need[1] == new_list[1] and i_need[2] == new_list[2] %}
+         hiiiiiiiiiiiiiiii
+            {% set _ = context.update({'booled': 'stuuuuuuuuuuuuuuuuuuuuuoid'}) %}
+         {{ context.hi, i_need, new_list}}booled<br>
+         {% endif %}
+         {{ i_need[2] == new_list[2] }}blahblahblah{{ hi }}
+         {% if context.hi and context.hi != '?' and i_need[2] != new_list[2] %}
                <!-- correct dates -->
+                hellllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllloooooooooooooooooooooooooooooooooooooooooo
             <!-- and is noon - the 'main'(in my opinion) section of the day -->
                {% if '12:' in i['dt_txt'] %}
                   <!-- display that -->
+                   
                   {% set time = i['dt_txt'].split(' ') %}
                   <a href="/weather/{{ lat }}/{{ lon }}/{{ united }}/{{ time[0] }}" style="text-decoration: none">
                      <div class="item4 style">
@@ -234,30 +243,8 @@
                         <h4>{{ today['wind']['speed'] }} {{ speed }} {{ need[3] }}</h4>
                      </div>
                   </a>
-                  <!-- else -->
-                  {% else %}
-                  {% if '12:' in i['dxt_txt'] or '18:' in i['dxt_txt'] %}
-                     <!-- basiclaly if it is today, show day/night times of 'today' -->
-                     {% set time = i['dt_txt'].split(' ') %}
-                     <a href="/weather/{{ lat }}/{{ lon }}/{{ united }}/{{ time[0] }}" style="text-decoration: none">
-                        <div class="item4 style">
-                           <!-- show date -->
-                           <h3 class="just reddied">{{ time[0] }}</h3>
-                           <h3 style="opacity: 0">hcajshdkfasdc</h3>
-                           <h3><b>{{ today['main']['temp_max'] }}</b>/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
-                           <h3 style="opacity: 0">hcajshdkfasdc</h3>
-                           <!-- cloudiness -->
-                           <img src="{{ need[0] }}" alt="{{ need[1] }}" width="50">
-                           {{ need[2] }} 
-                           <h3 style="opacity: 0">dkfasdc</h3>
-                           <!-- and wind -->
-                           <h4>{{ today['wind']['speed'] }} {{ speed }} {{ need[3] }}</h4>
-                        </div>
-                     </a>
-                  {% endif %}
                {% endif %}
             <!-- or already added -->
-            {% endif %}
          {% endif %}
   {% endfor %}
 

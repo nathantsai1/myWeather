@@ -81,6 +81,7 @@ def eez(lat, lon, units, api_key):
         # get time:
         hope = datetime.datetime.utcfromtimestamp(dataday['dt'] + dataday['timezone']).strftime('%Y-%m-%d %H:%M:%S')
         list = [data, lon, lat, dataday, zoned, hope, units]
+        print(hope)
         return list
 
 def icon(today):
