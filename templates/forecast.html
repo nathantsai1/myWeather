@@ -10,13 +10,13 @@
     <!-- and the wind speed -->
     {% if united == 'standard' %}
       {% set my_unit = '° K' %}
-      {% set speed = 'mph' %}
+      {% set speed = 'm/s' %}
     {% elif united == 'metric' %}
       {% set my_unit = '° C' %}
       {% set speed = 'm/s' %}
     {% elif united == 'imperial' %}
       {% set my_unit = '° F' %}
-      {% set speed = 'm/s' %}
+      {% set speed = 'mph' %}
     {% endif %}
 
     <!-- add three options -->
