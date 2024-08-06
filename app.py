@@ -13,7 +13,8 @@ from helpers import (
     reverse_weather,
     time_zone,
     eez,
-    icon
+    icon,
+    timing
     )
 import datetime
 from zoneinfo import ZoneInfo
@@ -32,15 +33,12 @@ def home():
 api_key = 'd0d0e6975b6a6865318ca1e63051a638'
 @app.route('/weather', methods=['POST', 'GET'])
 def get_weather():
-    # Get the city name from query parameters, default to 'London' if not provided
     if request.method == "POST":
         # check paramaters
         if not request.form.get("city") or request.form.get("city").strip() == "":
-            # give alert that declares that there is no city inputted
             return render_template('weather.html', empty='empty')
         
         # Construct the complete API URL
-
         # use openweathermap to geocode the location
         response = location(request.form.get('city'), api_key)
        
@@ -59,12 +57,6 @@ def get_weather():
         link = f"/weather/{ data['lat'] }/{ data['lon']}"
         return redirect(link)       
     else:
-        # see if user wants to share location
-        # basically from openai
-        # data = request.get_json()
-        # latitude = data.get('latitude')
-        # longitude = data.get('longitude')
-        
         return render_template('weather.html')
 
 
@@ -97,6 +89,29 @@ def last(lat, lon, units, day):
         return render_template('all.html', data=welcoming[0], lon=welcoming[1], lat=welcoming[2], today=welcoming[3], timing=welcoming[4], now=welcoming[5], united=welcoming[6], need=datatize, special=day)
     else:        
         # return jsonify(welcoming[0])
-        return render_template('oneday.html', morning=welcoming[3], data=welcoming[0], lon=welcoming[1], lat=welcoming[2], today=welcoming[3], timing=welcoming[4], now=welcoming[5], united=welcoming[6], need=datatize, special=day)
+        # get mornings and evenings\
+        hola = []
+        for i in welcoming[0]['list']:
+            hola.append(i['dt_txt'])
+            # if welcoming is the day 'day'
+            if (day in i['dt_txt']):
+                # if is morning
+                if ('12:00:00' in i['dt_txt']):
+                    morning = i
+                    continue
+                # or night
+                elif ('18:00:00' in i['dt_txt']):
+                    evening = i
+                    break
+        # return jsonify(morning)
+        # if is evening
+        sunrise = timing(welcoming[0]['city']['sunrise'], welcoming[0]['city']['timezone'])
+        sunset = timing(welcoming[0]['city']['sunset'], welcoming[0]['city']['timezone'])
+        return render_template('oneday.html', sunrise=sunrise, sunset=sunset, 
+                               morning=morning, evening=evening, data=welcoming[0], 
+                               lon=welcoming[1], lat=welcoming[2], 
+                               today=welcoming[3], timing=welcoming[4], 
+                               now=welcoming[5], united=welcoming[6], 
+                               need=datatize, special=day)
 if __name__ == '__main__':
     app.run(debug=True)

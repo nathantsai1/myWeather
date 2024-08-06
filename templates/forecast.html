@@ -28,62 +28,56 @@
      </div>
 
      <!-- display todays weather -->
-         <h2 class="green">Weather today:</h2>
       <div class="container5">
-         <div class="justacontainer">
-            <h1 class="reddied">Temperature:</h1>
-            <div class="container6">
-               <div class="item3">
-                  <h5 class="just">Feels like:<br></h5>
-                  <h3>{{ today['main']['feels_like'] }}{{ my_unit }}</h3>
-               </div>
-               <div class="item3">
-                  <h5 class="just">Temperature now:<br></h5>
-                  <h3>{{ today['main']['temp'] }}{{ my_unit }}</h3>
-               </div>
+         <h2 class="green">Weather today:</h2><br>
+         <h1 class="reddied">Temperature:</h1>
+         <div class="container6">
+            <div class="item3">
+               <h5 class="just">Feels like:<br></h5>
+               <h3>{{ today['main']['feels_like'] }}{{ my_unit }}</h3>
             </div>
-            <div class="container6">
-               <div class="item3">
-                  <h5 class="just">Max/Min temperature: <br></h5>
-                  <h3>{{ today['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
-               </div>
-               <div class="item3">
-                  <h5 class="just">Humidity: <br></h5>
-                  <h3>{{ today['main']['humidity'] }}%</h3>
-               </div>
+            <div class="item3">
+               <h5 class="just">Temperature now:<br></h5>
+               <h3>{{ today['main']['temp'] }}{{ my_unit }}</h3>
             </div>
-            <hr>
-            <!-- cloudiness -->
-            <h1 class="reddied">Cloudiness:</h1>
-            <div class="container6">
-               <div class="item3">
-                  <!-- the logo -->
-                  <img src="{{ need[0] }}" alt="{{ need[1] }}" width="50">
-                  {{ need[2] }} 
-                  <!-- more cloud stuff -->
-               </div>
-               <div class="item3">
-                  <h5>Description: {{ today['weather'][0]['description'] }}</h5>
-               </div>
+         </div>
+         <div class="container6">
+            <div class="item3">
+               <h5 class="just">Max/Min temperature: <br></h5>
+               <h3>{{ today['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
             </div>
-            <div class="container6">
+            <div class="item3">
+               <h5 class="just">Humidity: <br></h5>
+               <h3>{{ today['main']['humidity'] }}%</h3>
+            </div>
+         </div>
+         <hr>
+         <!-- cloudiness -->
+         <h1 class="reddied">Cloudiness:</h1>
+         <div class="container6">
+            <div class="item3">
+               <!-- the logo -->
+               <img src="{{ need[0] }}" alt="{{ need[1] }}" width="50">
+               {{ need[2] }} 
+               <h5>Description: {{ today['weather'][0]['description'] }}</h5>
+               <!-- more cloud stuff -->
+            </div>
+            <div class="item3">
+               <h5 class="just">Probability of precipitation:</h5>
+               <h3>{{ today['pop'] | int * 100 }}%</h3>
+               <h5 style="opacity: 0">.</h5>
+            </div>
+         </div>
+         <hr>
+         <!-- windi(pronouced like "wendeee")ness -->
+         <h1 class="reddied">Wind:</h1>
+         <div class="container6">
+         <!-- wind direction -->
                <div class="item3">
-                  <h5 class="just">Probability of precipitation:</h5>
-                  <h3>{{ today['pop'] | int * 100 }}%</h3>
+               <h5 class="just">Wind direction and speed:</h5>
+               <h4>{{ today['wind']['speed'] }} {{ speed }} {{ need[3] }}</h4>
                </div>
-            </div>
-            <hr>
-            <!-- windi(pronouced like "wendeee")ness -->
-            <h1 class="reddied">Wind:</h1>
-            <div class="container6">
-            <!-- wind direction -->
-                <div class="item3">
-                  <h5 class="just">Wind direction and speed:</h5>
-                  <h4>{{ today['wind']['speed'] }} {{ speed }} {{ need[3] }}</h4>
-               </div>
-            <!-- div below is for the inside green container  -->
-            </div>
-         <!-- div below is for the inside white container  -->
+         <!-- div below is for the inside green container  -->
          </div>
       <!-- div below is for the outside green container  -->
       </div>

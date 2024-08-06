@@ -135,3 +135,8 @@ def icon(today):
         link.append('NW')
     return link
    
+def timing(UTC, offset):
+    """
+    Converts UTC time and offset to local time zone
+    """
+    hope = datetime.datetime.utcfromtimestamp(UTC + offset).strftime('%H:%M:%S')
