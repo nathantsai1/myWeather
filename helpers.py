@@ -141,3 +141,36 @@ def timing(UTC, offset):
     Converts UTC time and offset to local time zone
     """
     hope = datetime.datetime.utcfromtimestamp(UTC + offset).strftime('%H:%M:%S')
+
+def iterations(data, day):
+    """
+    iterates for before/after stuff
+    """
+    ffinally = []
+    bool = False
+    hi = data['list']
+    for i in hi:
+        if day in i['dt_txt']:
+            bool = True
+            continue
+        elif('12:00' in i['dt_txt'] and bool == True and day not in i['dt_txt']):
+            ffinally.append(i)
+    return ffinally 
+    
+def iterations1(data, day):
+    """
+    iterates for before/after stuff
+    """
+    ffinally = []
+    bool = True
+    hi = data['list']
+    for i in hi:
+        if day in i['dt_txt']:
+            bool = False
+            continue
+        elif('12:00' in i['dt_txt'] and bool == True and day not in i['dt_txt']):
+            ffinally.append(i)
+    return ffinally 
+    
+
+

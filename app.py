@@ -14,7 +14,9 @@ from helpers import (
     time_zone,
     eez,
     icon,
-    timing
+    timing,
+    iterations,
+    iterations1
     )
 import datetime
 from zoneinfo import ZoneInfo
@@ -105,6 +107,8 @@ def last(lat, lon, units, day):
                     break
         # return jsonify(morning)
         # if is evening
+        after = iterations(welcoming[0], day)
+        before = iterations1(welcoming[0], day)
         sunrise = timing(welcoming[0]['city']['sunrise'], welcoming[0]['city']['timezone'])
         sunset = timing(welcoming[0]['city']['sunset'], welcoming[0]['city']['timezone'])
         return render_template('oneday.html', sunrise=sunrise, sunset=sunset, 
@@ -112,6 +116,6 @@ def last(lat, lon, units, day):
                                lon=welcoming[1], lat=welcoming[2], 
                                today=welcoming[3], timing=welcoming[4], 
                                now=welcoming[5], united=welcoming[6], 
-                               need=datatize, special=day)
+                               need=datatize, special=day, before=before, after=after)
 if __name__ == '__main__':
     app.run(debug=True)
