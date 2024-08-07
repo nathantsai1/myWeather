@@ -86,36 +86,43 @@ def last(lat, lon, units, day):
     elif welcoming[0] == 'units':
         return render_template('weather.html', units=welcoming[1])
     datatize = icon(welcoming[3])
-    if day == 'all':
-        return jsonify(welcoming[0])
-        return render_template('all.html', data=welcoming[0], lon=welcoming[1], lat=welcoming[2], today=welcoming[3], timing=welcoming[4], now=welcoming[5], united=welcoming[6], need=datatize, special=day)
-    else:        
-        # return jsonify(welcoming[0])
-        # get mornings and evenings\
-        hola = []
-        for i in welcoming[0]['list']:
-            hola.append(i['dt_txt'])
-            # if welcoming is the day 'day'
-            if (day in i['dt_txt']):
-                # if is morning
-                if ('12:00:00' in i['dt_txt']):
-                    morning = i
-                    continue
-                # or night
-                elif ('18:00:00' in i['dt_txt']):
-                    evening = i
-                    break
-        # return jsonify(morning)
-        # if is evening
-        after = iterations(welcoming[0], day)
-        before = iterations1(welcoming[0], day)
-        sunrise = timing(welcoming[0]['city']['sunrise'], welcoming[0]['city']['timezone'])
-        sunset = timing(welcoming[0]['city']['sunset'], welcoming[0]['city']['timezone'])
-        return render_template('oneday.html', sunrise=sunrise, sunset=sunset, 
-                               morning=morning, evening=evening, data=welcoming[0], 
-                               lon=welcoming[1], lat=welcoming[2], 
-                               today=welcoming[3], timing=welcoming[4], 
-                               now=welcoming[5], united=welcoming[6], 
-                               need=datatize, special=day, before=before, after=after)
+    # get mornings and evenings\
+    hola = []
+    for i in welcoming[0]['list']:
+        hola.append(i['dt_txt'])
+        # if welcoming is the day 'day'
+        if (day in i['dt_txt']):
+            # if is morning
+            if ('12:00:00' in i['dt_txt']):
+                morning = i
+                continue
+            # or night
+            elif ('18:00:00' in i['dt_txt']):
+                evening = i
+                print('hi')
+                break
+    # return jsonify(morning)
+    # if is evening
+    after = iterations(welcoming[0], day)
+    before = iterations1(welcoming[0], day)
+    sunrise = timing(welcoming[0]['city']['sunrise'], welcoming[0]['city']['timezone'])
+    sunset = timing(welcoming[0]['city']['sunset'], welcoming[0]['city']['timezone'])
+    # pass a looooooooot of information so that jinja does not return error statements
+    # also is easier to do intellectual part server side
+    return render_template('oneday.html', sunrise=sunrise, sunset=sunset, 
+                           morning=morning, evening=evening, data=welcoming[0], 
+                            lon=welcoming[1], lat=welcoming[2], 
+                           today=welcoming[3], timing=welcoming[4], 
+                           now=welcoming[5], united=welcoming[6], 
+                           need=datatize, special=day, before=before, after=after)
+
+# for 'learning' what the weather symbols mean
+@app.route('/learning', methods=["GET"])
+def learning():
+    return render_template('learning.html')
+
+@app.route('/about', methods=["GET"])
+def about():
+    return render_template('about.html')
 if __name__ == '__main__':
     app.run(debug=True)

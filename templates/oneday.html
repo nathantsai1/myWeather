@@ -80,7 +80,7 @@
             </div>
             <div class="item5">
                <h5 class="just light">Humidity: <br></h5>
-               <h3>{{ morning['main']['humidity'] }}%</h3>
+               <h3>{{ morning['main']['humidity'] }} hPa</h3>
                </div>
          </div>
          <!-- cloudiness -->
@@ -107,7 +107,7 @@
          <h1 class="light">Wind:</h1>
          <div class="container6">
          <!-- wind direction -->
-               <div class="item5">
+               <div class="item5 ">
                   <h5 class="just light">Wind direction and speed:</h5>
                   <h4>{{ morning['wind']['speed'] }} {{ speed }} {{ need[3] }}</h4>
                </div>
@@ -129,18 +129,18 @@
             </div>
             </div>
          <div class="container6">
-            <div class="item5">
+            <div class="height" style="border: 2px solid #FEF250">
                <h5 class="just dark">Max/Min temperature: <br></h5>
                <h5>{{ morning['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h4>
             </div>
             <div class="item5">
                <h5 class="just dark">Humidity: <br></h5>
-               <h3>{{ morning['main']['humidity'] }}%</h3>
+               <h3>{{ morning['main']['humidity'] }} hPa</h3>
                </div>
          </div>
          <!-- cloudiness -->
          <h1 class="dark">Cloudiness:</h1>
-         <div class="container6">
+         <div class="container6 for">
             <div class="item5">
                <!-- the logo -->
                 <!-- hieght puts objects over and under each other -->
