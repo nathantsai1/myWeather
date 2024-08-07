@@ -121,8 +121,10 @@ def last(lat, lon, units, day):
 def learning():
     return render_template('learning.html')
 
+# credits due to where they are needed
 @app.route('/about', methods=["GET"])
 def about():
     return render_template('about.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
