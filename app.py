@@ -24,7 +24,6 @@ from zoneinfo import ZoneInfo
 # my first time using an api
 app = Flask(__name__)
 # API key and base URL for OpenWeather API
-# api_key = 'd0d0e6975b6a6865318ca1e63051a638'
 # thx to chatGPT for helping me with learning how to retrieve information from APIs
 base_url = 'http://api.openweathermap.org/data/2.5/weather'
 
@@ -32,7 +31,7 @@ base_url = 'http://api.openweathermap.org/data/2.5/weather'
 def home():
     return render_template('home.html')
 
-api_key = 'd0d0e6975b6a6865318ca1e63051a638'
+# use your own api key pls!
 @app.route('/weather', methods=['POST', 'GET'])
 def get_weather():
     if request.method == "POST":
