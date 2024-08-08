@@ -88,7 +88,7 @@ def icon(today):
     # return '01' in today['weather'][0]['icon']
     if '01' in today['weather'][0]['icon']:
         #    <!-- clear sky -->
-        link = ["/static/clear.png", 'Clear skies', 'Made by BZZRINCANTATION']
+        link = ["/static/clear.png", 'Clear skies', 'Made by Afif Fuden']
     elif '02' in today['weather'][0]['icon']:
         #    <!-- few clouds -->
         link = ["https://cdn-icons-png.freepik.com/512/10331/10331006.png", 'Few clouds', 'Icon by BZZRINCANTATION']

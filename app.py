@@ -45,7 +45,7 @@ def get_weather():
         response = location(request.form.get('city'), api_key)
        
         # if there is no location
-        if response == "no":
+        if response == "no" or response == "":
             return render_template('weather.html', alert=request.form.get('city'))
         data = response.json()
         # give out all responses
@@ -55,7 +55,11 @@ def get_weather():
             # if there are multiple places, ask for which one to use
             return render_template("loop.html", length=length, data=data)
         #return specific city information if there is only one
-        data = data[0]
+        # only if it works though
+        try:
+            data = data[0]
+        except IndexError:
+            return render_template('weather.html', alert=request.form.get('city'))
         link = f"/weather/{ data['lat'] }/{ data['lon']}"
         return redirect(link)       
     else:

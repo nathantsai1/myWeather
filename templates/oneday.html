@@ -30,9 +30,11 @@
     <!-- change measurements -->
     <h2 class="green">Change units of measure<hr></h2>
      <div class="container7">
-        <button type="button" style="grid-column: 1" class="btn btn-primary"><a class="none" style="color: white" href="/weather/{{lat}}/{{lon}}/standard/{{ special }}">Standard</a></button>
-        <button type="button" style="grid-column: 2" class="btn btn-success "><a class="none"href="/weather/{{lat}}/{{lon}}/metric/{{ special }}">Metric</a></button>
-        <button type="button" style="grid-column: 3" class="btn btn-danger"><a class="none" href="/weather/{{lat}}/{{lon}}/imperial/{{ special }}">Imperial</a></button>
+      <button type="button" style="grid-column: 1" class="btn btn-primary"><a class="none" style="color: white" href="/weather/{{lat}}/{{lon}}/standard">Standard</a></button>
+      <h5 style="opacity: 0">...</h5>
+      <button type="button" style="grid-column: 2" class="btn btn-success "><a class="none"href="/weather/{{lat}}/{{lon}}/metric">Metric</a></button>
+      <h5 style="opacity: 0">...</h5>
+      <button type="button" style="grid-column: 3" class="btn btn-danger"><a class="none" href="/weather/{{lat}}/{{lon}}/imperial">Imperial</a></button>
      </div>
      <hr>
      <h2 class="green">5 day weather forecast</h2>
@@ -74,9 +76,9 @@
             </div>
             </div>
          <div class="container6">
-            <div class="item5">
+            <div class="height" style="border: 2px solid #FEF250; width: 50%;">
                <h5 class="just light">Max/Min temperature: <br></h5>
-                  <h3>{{ morning['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h3>
+               <h5 class="reddied">{{ morning['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h4>
             </div>
             <div class="item5">
                <h5 class="just light">Humidity: <br></h5>
@@ -129,9 +131,9 @@
             </div>
             </div>
          <div class="container6">
-            <div class="height" style="border: 2px solid #FEF250">
+            <div class="height" style="border: 2px solid #FEF250; width: 50%;">
                <h5 class="just dark">Max/Min temperature: <br></h5>
-               <h5>{{ morning['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h4>
+               <h5 class="reddied">{{ morning['main']['temp_max'] }}/{{ today['main']['temp_min'] }}{{ my_unit }}</h4>
             </div>
             <div class="item5">
                <h5 class="just dark">Humidity: <br></h5>
