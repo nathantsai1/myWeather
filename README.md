@@ -6,6 +6,12 @@ This app(it's actually a website) gives the weather, pulling information from th
 2. take the weather from openweathermap, just the one day.
 3. take the 5 day forecast from openweathermap, to edit and send back to the hdmi templates
 
+## how to use
+1. You do need a api_key from openweathermap, and paste that with the three todos. According to the articles on this that I read, it does take a few hours to make one, but I was able to make this immediately
+2. If you are not using replit, you do need to download the contents of 'requirements.txt', and python/css/js/html extension if you do not already. I used a venv, to keep these downloads in my folder, but I believe that may not be neccessary. 
+3. If this is in VScode, use flask run, and click the link under the red text. If you are in Replit, click the run button, and go the networking tab, next to the console(usually on the right tab) and click the Dev URL.
+I hope you enjoy this website!
+
 ## credits
 Credits are due where they are needed, so here are the sources that I used:
 1. Freepik
