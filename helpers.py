@@ -141,6 +141,7 @@ def timing(UTC, offset):
     Converts UTC time and offset to local time zone
     """
     hope = datetime.datetime.utcfromtimestamp(UTC + offset).strftime('%H:%M:%S')
+    return hope
 
 def iterations(data, day):
     """

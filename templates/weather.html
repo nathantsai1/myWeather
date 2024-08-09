@@ -38,16 +38,15 @@
             //  let alert = "{{ alert }}";
             alert(`It seems like your city with (lat, lon)[{{ newert }}] does not exist! Please change your coordinates`);
         </script>
-        <!-- or there is an empty string! -->
      {% elif empty %}
         <script>
+            // not a valid city
             alert('Please enter a valid value into the city input')
-            // ask for location
         </script>
     {% elif units %}
         <script>
             alert('It seems like unit: "{{ units }}" is not an accepted unit. Please change it!')
-            // ask for location
+            // not a valid unit
         </script>
     {% elif hellp %}
     <script>
