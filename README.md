@@ -27,6 +27,8 @@ Credits are due where they are needed, so here are the sources that I used:
 4. OpenAI
    * when I did have tedious questions, and couldn't find the answers to these problems on Stack Overflow, I turned to ChatGPT for answers.
    1. One instance I remember clearly is when I tried to use jinja for if / else, and setting properties under that. It took almost two sessions, but I finally hit a lightbulb and transferred the jinja code to python lines. 
+5. Figma
+   * when I had many questions on what color I should use, Figma was the place to go, for their color pallete, and similar colors that made me happy, and made the color scheme what I thought the website should look like, better and more colorful.
 
 ## conclusion
 I do realize that this README was long, but I am proud of my weather project. 

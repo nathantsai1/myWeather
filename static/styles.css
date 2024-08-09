@@ -12,6 +12,8 @@
     margin: 0px;
     background-color: aquamarine;
     gap: 10px;
+    border-radius: 12px;
+
  }
 
  /* all containers */
@@ -27,6 +29,8 @@
    /* Center the grid items within their cells */
    justify-items: center;
    align-items: center;
+   border-radius: 7px;
+
    /* align-content: start; */
 }
 
