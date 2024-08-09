@@ -12,6 +12,8 @@ This app(it's actually a website) gives the weather, pulling information from th
 3. If this is in VScode, use flask run, and click the link under the red text. If you are in Replit, click the run button, and go the networking tab, next to the console(usually on the right tab) and click the Dev URL.
 I hope you enjoy this website!
 
+## please
+Do not use constantly reaload the repl.it 's site, as there will be an error!
 ## credits
 Credits are due where they are needed, so here are the sources that I used:
 1. Freepik
