@@ -259,13 +259,19 @@
     transition: height 2s ease;
 }
 
-#shouldhide {
+.shouldhide {
    display: none;
+   grid-column: 1;
 }
 
 .nav_expand:hover {
    height: 300px; /* Adjust this value as needed */
 }
+
+.nav_expand.hovered {
+   height: 300px; /* Adjust this value as needed */
+}
+
 /* items */
 .item3 {
    display: flex;

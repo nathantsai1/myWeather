@@ -15,25 +15,25 @@
   <body>
     <div id="homed">
         <!-- logo -->
-         <h2><a href="/"><img src="/static/logo.png" width="300px" alt="the good weather App"></a></h2>
+         <div style="grid-column: 1"><a href="/"><img src="/static/logo.png" width="300px" alt="the good weather App"></a></div>
         <!--search--> 
-        <div id='0' id="shouldhide" style="grid-column: 4">
+        <div id='0' class="shouldhide" style="grid-column: 4">
           <a class="none black" style="color: #7400B8" href="/"><b>Hover for more options</b></a>
         </div>
         <div id='1' class="nill" style="grid-column: 4">
-          <a class="none black" style="color: #7400B8" href="/"><b>Home</b></a>
+          <a class="none black" style="color: #EE4B2B" href="/"><b>Home</b></a>
         </div>
         <div id='2' class="nill" style="grid-column: 4">
-          <a class="none black" style="color: #7400B8" href="/weather"><b>Weather</b></a>
+          <a class="none black" style="color: #968E85" href="/weather"><b>Weather</b></a>
         </div>
         <div id='3' class="nill" style="grid-column: 4">
-          <a class="none black" style="color: #7400B8" href="/about"><b>About us</b></a>
+          <a class="none black" style="color: #000080" href="/about"><b>About us</b></a>
         </div>
         <div id='4' class="nill" style="grid-column: 4">
-          <a class="none black" style="color: #7400B8" href="/learning"><b>What are these weather symbols?</b></a>
+          <a class="none black" style="color: #CD5909" href="/learning"><b>What are these weather symbols?</b></a>
         </div>
         <div id='5' class="nill" style="grid-column: 4">
-          <a class="none black" style="color: #7400B8; opacity: 0" href="/learning"><b>adfasdfadsf</b></a>
+          <a class="none black" style="color: #FFF4E9; opacity: 0" href="/learning"><b>adfasdfadsf</b></a>
         </div>
     </div>
     {% block main %}{% endblock%}
@@ -51,17 +51,27 @@
           }
           document.getElementById("shouldhide").display = "none";
         }
-        else{
+        else {
           alert("yes")
-          element.classList.add("nav_expand"); // Add newone class to DIV
+          element.classList.add("nav_expand");
+          var unhide = document.getElementsByClassName("nill");
+          const new_element = document.getElementsByClassName("shouldhide"); 
+          new_element[0].style.display = "block";
+
           element.onmouseover = function() {
             // unhide some elements
-            var unhide = document.getElementsByClassName("nill");
+            new_element[0].style.display = "none";
             for (var i = 0; i < unhide.length; i++) {
               unhide[i].style.display = "block";
             }
           };
 
+          element.addEventListener('click', function() {
+            new_element[0].style.display = "none";
+            var hovering = document.getElementById('homed');
+            hovering.classList.toggle('hovered');
+          })
+          console.log(document.getElementById('homed').style.display)
           element.onmouseout = function() {
             var unhide = document.getElementsByClassName("nill");
             for (var i = 0; i < unhide.length; i++) {
