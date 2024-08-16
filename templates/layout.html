@@ -13,7 +13,7 @@
 
    </head>
   <body>
-    <div class="navbar">
+    <div id="homed">
         <!-- logo -->
          <h2><a href="/"><img src="/static/logo.png" width="300px" alt="the good weather App"></a></h2>
         <!--search--> 
@@ -34,5 +34,21 @@
         </div>
     </div>
     {% block main %}{% endblock%}
+    <script>
+      /* check for  screen width */
+      function myFunction() {
+        const element = document.getElementById("homed");  // Get the DIV element
+        const width = screen.availWidth;
+        alert(width)
+        if (width > 1000) {
+          element.classList.add("navbar"); // Add newone class to DIV
+        }
+        else{
+          alert("yes")
+          element.classList.add("nav_expand"); // Add newone class to DIV
+        }
+      }
+      myFunction()
+    </script>
   </body>
 </html>
