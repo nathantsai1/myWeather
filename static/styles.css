@@ -174,8 +174,8 @@
     margin: 0px;
     width: 100%;
     height: 800px;
-    background-image: url(https://pics.craiyon.com/2023-11-15/EqOMJbMCQ1i8EBmJJInWNw.webp);
- }
+    background-image: linear-gradient(to right, #48AAAD , #D3D3D3);
+   }
 
 
  /* all decorations */
