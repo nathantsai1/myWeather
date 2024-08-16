@@ -17,19 +17,19 @@
         <!-- logo -->
          <h2><a href="/"><img src="/static/logo.png" width="300px" alt="the good weather App"></a></h2>
         <!--search--> 
-        <div style="grid-column: 4">
+        <div id='1' style="grid-column: 4">
           <a class="none black" style="color: #7400B8" href="/"><b>Home</b></a>
         </div>
-        <div style="grid-column: 4">
+        <div id='2' style="grid-column: 4">
           <a class="none black" style="color: #7400B8" href="/weather"><b>Weather</b></a>
         </div>
-        <div style="grid-column: 4">
+        <div id='3' style="grid-column: 4">
           <a class="none black" style="color: #7400B8" href="/about"><b>About us</b></a>
         </div>
-        <div style="grid-column: 4">
+        <div id='4' style="grid-column: 4">
           <a class="none black" style="color: #7400B8" href="/learning"><b>What are these weather symbols?</b></a>
         </div>
-        <div style="grid-column: 4">
+        <div id='5' style="grid-column: 4">
           <a class="none black" style="color: #7400B8; opacity: 0" href="/learning"><b>adfasdfadsf</b></a>
         </div>
     </div>
@@ -38,7 +38,7 @@
       /* check for  screen width */
       function myFunction() {
         const element = document.getElementById("homed");  // Get the DIV element
-        const width = screen.availWidth;
+        var width = window.innerWidth;
         alert(width)
         if (width > 1000) {
           element.classList.add("navbar"); // Add newone class to DIV
@@ -46,8 +46,17 @@
         else{
           alert("yes")
           element.classList.add("nav_expand"); // Add newone class to DIV
+          element.onmouseover = function() {
+            changeColorOnHover(this);
+          };
+
+          element.onmouseout = function() {
+            resetColor(this);
+          };
         }
       }
+      // from bingchat
+
       myFunction()
     </script>
   </body>

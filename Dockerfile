@@ -1,7 +1,7 @@
 FROM ubuntu
 
 RUN apt update
-RUN apt install python3-pip -y
+RUN apt install python3-xyz
 RUN pip3 install Flask
 
 WORKDIR /app
