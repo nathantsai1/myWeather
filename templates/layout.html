@@ -17,19 +17,22 @@
         <!-- logo -->
          <h2><a href="/"><img src="/static/logo.png" width="300px" alt="the good weather App"></a></h2>
         <!--search--> 
-        <div id='1' style="grid-column: 4">
+        <div id='0' id="shouldhide" style="grid-column: 4">
+          <a class="none black" style="color: #7400B8" href="/"><b>Hover for more options</b></a>
+        </div>
+        <div id='1' class="nill" style="grid-column: 4">
           <a class="none black" style="color: #7400B8" href="/"><b>Home</b></a>
         </div>
-        <div id='2' style="grid-column: 4">
+        <div id='2' class="nill" style="grid-column: 4">
           <a class="none black" style="color: #7400B8" href="/weather"><b>Weather</b></a>
         </div>
-        <div id='3' style="grid-column: 4">
+        <div id='3' class="nill" style="grid-column: 4">
           <a class="none black" style="color: #7400B8" href="/about"><b>About us</b></a>
         </div>
-        <div id='4' style="grid-column: 4">
+        <div id='4' class="nill" style="grid-column: 4">
           <a class="none black" style="color: #7400B8" href="/learning"><b>What are these weather symbols?</b></a>
         </div>
-        <div id='5' style="grid-column: 4">
+        <div id='5' class="nill" style="grid-column: 4">
           <a class="none black" style="color: #7400B8; opacity: 0" href="/learning"><b>adfasdfadsf</b></a>
         </div>
     </div>
@@ -42,16 +45,28 @@
         alert(width)
         if (width > 1000) {
           element.classList.add("navbar"); // Add newone class to DIV
+          var unhide = document.getElementsByClassName("nill");
+          for (var i = 0; i < unhide.length; i++) {
+            unhide[i].style.display = "block";
+          }
+          document.getElementById("shouldhide").display = "none";
         }
         else{
           alert("yes")
           element.classList.add("nav_expand"); // Add newone class to DIV
           element.onmouseover = function() {
-            changeColorOnHover(this);
+            // unhide some elements
+            var unhide = document.getElementsByClassName("nill");
+            for (var i = 0; i < unhide.length; i++) {
+              unhide[i].style.display = "block";
+            }
           };
 
           element.onmouseout = function() {
-            resetColor(this);
+            var unhide = document.getElementsByClassName("nill");
+            for (var i = 0; i < unhide.length; i++) {
+              unhide[i].style.display = "none";
+            }
           };
         }
       }
