@@ -69,9 +69,31 @@
           element.addEventListener('click', function() {
             new_element[0].style.display = "none";
             var hovering = document.getElementById('homed');
-            hovering.classList.toggle('hovered');
+            var displayValue = window.getComputedStyle(document.getElementById('homed')).height;
+            if (displayValue[0] == 1 || displayValue[0] == 6 || displayValue[0] == 2) {
+              try{
+                hovering.style.height = "300px"
+                var unhide = document.getElementsByClassName("nill");
+                for (var i = 0; i < unhide.length; i++) {
+                  unhide[i].style.display = "block";
+                  alert(i)
+                }
+                alert("success!")
+              }
+              catch(err){
+                alert(hovering.classlist)
+                alert("noo")              }
+            }
+            else {
+              hovering.style.height = "60px"
+              alert('removed')
+            }
+            alert(Number(displayValue[0]) * 10 + Number(displayValue[1]))
+            alert(displayValue)
           })
-          console.log(document.getElementById('homed').style.display)
+          var homedElement = document.getElementById('homed');
+          var displayValue = window.getComputedStyle(homedElement).height;
+      
           element.onmouseout = function() {
             var unhide = document.getElementsByClassName("nill");
             for (var i = 0; i < unhide.length; i++) {

@@ -271,6 +271,9 @@
 .nav_expand.hovered {
    height: 300px; /* Adjust this value as needed */
 }
+.nav_expand.hovering {
+   height: 60px; /* Adjust this value as needed */
+}
 
 /* items */
 .item3 {
