@@ -40,64 +40,85 @@
     <script>
       /* check for  screen width */
       function myFunction() {
-        const element = document.getElementById("homed");  // Get the DIV element
+        // main div
+        const element = document.getElementById("homed");
+        // window screen in px
         var width = window.innerWidth;
-        alert(width)
+        // all elements of div
+        var unhide = document.getElementsByClassName("nill");
+        // just to check if style should be hidden or not
+        var yup = undefined;
         if (width > 1000) {
+          // full screen
           element.classList.add("navbar"); // Add newone class to DIV
-          var unhide = document.getElementsByClassName("nill");
           for (var i = 0; i < unhide.length; i++) {
-            unhide[i].style.display = "block";
+            unhide[i].style.display = "block"; // for showing all div elements
           }
+          // and hiding those that shouldd be there
           document.getElementById("shouldhide").display = "none";
         }
         else {
-          alert("yes")
+          // or not(full screen)
+          // make main div expanidng navbar
           element.classList.add("nav_expand");
-          var unhide = document.getElementsByClassName("nill");
+          // hints in website
           const new_element = document.getElementsByClassName("shouldhide"); 
+          // show hint
           new_element[0].style.display = "block";
 
+          // render everything hidden
+          for (var i = 0; i < unhide.length; i++) {
+            unhide[i].style.display = "none"
+          }
+          // is user hovering
           element.onmouseover = function() {
             // unhide some elements
             new_element[0].style.display = "none";
             for (var i = 0; i < unhide.length; i++) {
               unhide[i].style.display = "block";
             }
+            element.style.height = "250px"
           };
 
+          // is user on mobile?
           element.addEventListener('click', function() {
-            new_element[0].style.display = "none";
-            var hovering = document.getElementById('homed');
-            var displayValue = window.getComputedStyle(document.getElementById('homed')).height;
-            if (displayValue[0] == 1 || displayValue[0] == 6 || displayValue[0] == 2) {
-              try{
-                hovering.style.height = "300px"
-                var unhide = document.getElementsByClassName("nill");
+            // new_element[0].style.display = "none";
+            // main div
+            var displayValue = window.getComputedStyle(element).height;
+            alert(displayValue)
+            if (displayValue[0] == 1 || displayValue[0] == 6 || (displayValue[0] == 2 && displayValue[1] != 5)) {
+              // if display is not fully expanded(100, 200, 60 px)
+              try {
+                // force this thing to expand
+                element.style.height = "250px"
                 for (var i = 0; i < unhide.length; i++) {
                   unhide[i].style.display = "block";
-                  alert(i)
                 }
-                alert("success!")
+                yup = 'yes'
               }
               catch(err){
-                alert(hovering.classlist)
-                alert("noo")              }
+                // uh oh :(
+                alert("it seems like we've ran into a problem. Please check back later for an update!")
+              }
             }
+            // user is already expanded
             else {
-              hovering.style.height = "60px"
-              alert('removed')
+              // so change it back onclick
+              element.style.height = "60px"
+              for (var i = 0; i < unhide.length; i++) {
+                  unhide[i].style.display = "none";
+              }
+              yup = undefined;
             }
-            alert(Number(displayValue[0]) * 10 + Number(displayValue[1]))
-            alert(displayValue)
           })
-          var homedElement = document.getElementById('homed');
-          var displayValue = window.getComputedStyle(homedElement).height;
-      
+          
+          // is not hovering over
           element.onmouseout = function() {
-            var unhide = document.getElementsByClassName("nill");
-            for (var i = 0; i < unhide.length; i++) {
-              unhide[i].style.display = "none";
+            if (yup == undefined){
+              for (var i = 0; i < unhide.length; i++) {
+                unhide[i].style.display = "none";
+              }
+              element.style.height = "60px"
             }
           };
         }
