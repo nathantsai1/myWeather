@@ -5,7 +5,9 @@ This app(it's actually a website) gives the weather, pulling information from th
 1. take all cities with the name of inputted site(taken from a 'POST' form with a text input), taking the Longitude, Latitude, city, and state/country. the name of this API was the 'geocacher', so to speak, was the openweathermap.com, which gave out small time information for free.
 2. take the weather from openweathermap, just the one day.
 3. take the 5 day forecast from openweathermap, to edit and send back to the hdmi templates
-
+   
+## images
+https://cloud-eiu4hoh6p-hack-club-bot.vercel.app/0screenshot__52_.png
 ## how to use
 1. You do need a api_key from (openweathermap)[https://openweathermap.org/home/sign_up], and the api key will be in your email. According to the articles on this that I read, it does take a few hours to make one, but I was able to make this immediately
 2. If you are not using replit, you do need to download the contents of 'requirements.txt', and python/css/js/html extensions if you do not have it already. Use openweathermap's api key and paste it into the function "api_keyed" in api.py(in the 'api_key_goes_here' place). I used a venv, to keep these downloads in my folder, but I believe that may not be neccessary. 
