@@ -20,23 +20,23 @@ Do not use constantly reaload the repl.it 's site, as there will be an error!
 Credits are due where they are needed, so here are the sources that I used:
 1. Freepik
    * Many different logos(for showing the conditions of the clouds) were used, and in order, here are their authors:
-   1.  Afif Fuden for this author's scattered clouds icon
-   2.  Eucalyp for this author's broken clouds icon
-   3.  VectorPortal for this author's shower rain icon
-   4.  Freepik for this author's rainy icon
-   5.  Creative Stall Premium for this author's thunderstorm icon
+      1.  Afif Fuden for this author's scattered clouds icon
+      2.  Eucalyp for this author's broken clouds icon
+      3.  VectorPortal for this author's shower rain icon
+      4.  Freepik for this author's rainy icon
+      5.  Creative Stall Premium for this author's thunderstorm icon
    *  Dreamcreateicons for this author's snowy icon
    *  Grafixpoint for this author's misty icon
 2. Openweather API
    *  As stated above, this API was used in three ways.
-   1. The weather
-   2. The forecast
-   3. The Geocacher 
+      1. The weather
+      2. The forecast
+      3. The Geocacher 
 3. Wikipedia
    * I'd have to say, Wikipedia was almost THE go-to source for my understanding and knowledge of the weather symbols.
 4. OpenAI
    * when I did have tedious questions, and couldn't find the answers to these problems on Stack Overflow, I turned to ChatGPT for answers.
-   1. One instance I remember clearly is when I tried to use jinja for if / else, and setting properties under that. It took almost two sessions, but I finally hit a lightbulb and transferred the jinja code to python lines. 
+      1. One instance I remember clearly is when I tried to use jinja for if / else, and setting properties under that. It took almost two sessions, but I finally hit a lightbulb and transferred the jinja code to python lines. 
 5. Figma
    * when I had many questions on what color I should use, Figma was the place to go, for their color pallete, and similar colors that made me happy, and made the color scheme what I thought the website should look like, better and more colorful.
 
